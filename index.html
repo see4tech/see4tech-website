@@ -1210,14 +1210,24 @@ document.querySelectorAll('a[onclick]').forEach(a => {
     const isLight = html.getAttribute('data-theme') === 'light';
     html.setAttribute('data-theme', isLight ? 'dark' : 'light');
     localStorage.setItem('s4t-theme', isLight ? 'dark' : 'light');
-    document.getElementById('theme-icon-moon').style.display = isLight ? 'block' : 'none';
-    document.getElementById('theme-icon-sun').style.display = isLight ? 'none' : 'block';
+    // In dark mode show sun (click to go light); in light mode show moon (click to go dark)
+    document.getElementById('theme-icon-moon').style.display = isLight ? 'none' : 'block';
+    document.getElementById('theme-icon-sun').style.display = isLight ? 'block' : 'none';
   }
   // Apply saved theme on load
   (function() {
     const saved = localStorage.getItem('s4t-theme') || 'light';
     if (saved === 'light') {
       document.documentElement.setAttribute('data-theme', 'light');
+      // Light mode: show moon (to switch to dark), hide sun
+      document.addEventListener('DOMContentLoaded', function() {
+        const moon = document.getElementById('theme-icon-moon');
+        const sun = document.getElementById('theme-icon-sun');
+        if (moon) moon.style.display = 'block';
+        if (sun) sun.style.display = 'none';
+      });
+    } else {
+      // Dark mode: show sun (to switch to light), hide moon
       document.addEventListener('DOMContentLoaded', function() {
         const moon = document.getElementById('theme-icon-moon');
         const sun = document.getElementById('theme-icon-sun');
