@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>See4 Tech — Strategic Technology Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0c0f0e;--bg2:#111714;--bg3:#161c19;
+    --teal:#216B67;--teal-light:#2d9b8f;
+    --lime:#E8EF62;--lime-dim:#ccd44a;
+    --text:#F0F2C7;--text-muted:#8a9e8f;--text-dim:#556057;
+    --border:#1c2a26;--border-light:#2a3d36;
+    --font:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;font-weight:500;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:72px;background:rgba(12,15,14,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+  .nav-logo{display:flex;align-items:center;gap:10px}
+  .nav-logo img{height:40px;width:auto}
+  .nav-links{display:flex;align-items:center;gap:2px;list-style:none}
+  .nav-links a{padding:6px 14px;border-radius:6px;font-size:0.875rem;color:var(--text-muted);transition:color .2s,background .2s;cursor:pointer}
+  .nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--bg3)}
+  .nav-links a.active{color:var(--lime)}
+  .nav-cta{background:var(--lime)!important;color:#0c0f0e!important;font-weight:600;padding:8px 20px!important;border-radius:6px!important}
+  .nav-cta:hover{background:var(--lime-dim)!important}
+  .lang-toggle{display:flex;align-items:center;gap:0;border:1px solid var(--border-light);border-radius:6px;overflow:hidden;margin-left:8px}
+  .lang-btn{padding:5px 11px;font-size:0.78rem;font-weight:600;letter-spacing:0.04em;background:transparent;color:var(--text-muted);cursor:pointer;border:none;font-family:var(--font);transition:all .2s}
+  .lang-btn.active{background:var(--lime);color:#0c0f0e}
+  .nav-mobile-btn{display:none;background:none;border:none;cursor:pointer;color:var(--text);padding:8px}
+  .page{display:none;padding-top:72px;min-height:100vh}
+  .page.active{display:block}
+  .container{max-width:1160px;margin:0 auto;padding:0 5vw}
+  .section{padding:96px 0}
+  .section-label{display:inline-flex;align-items:center;gap:8px;font-size:.75rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--lime);margin-bottom:20px}
+  .section-label::before{content:'';display:block;width:20px;height:1px;background:var(--lime)}
+  h1{font-size:clamp(2.4rem,5vw,4rem);font-weight:700;line-height:1.1;letter-spacing:-.02em}
+  h2{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;line-height:1.2;letter-spacing:-.02em}
+  h3{font-size:1.25rem;font-weight:600;letter-spacing:-.015em}
+  h4{font-size:1rem;font-weight:600}
+  p{color:var(--text-muted);line-height:1.75}
+  .lead{font-size:1.125rem;color:var(--text-muted);line-height:1.7;max-width:640px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:8px;font-size:.9rem;font-weight:600;transition:all .2s;cursor:pointer;border:none}
+  .btn-primary{background:var(--lime);color:#0c0f0e}
+  .btn-primary:hover{background:var(--lime-dim);transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border-light)}
+  .btn-ghost:hover{border-color:var(--teal-light);color:var(--lime);background:rgba(33,107,99,.08)}
+  .btn svg{width:16px;height:16px}
+  .tag{display:inline-block;padding:4px 12px;border-radius:100px;font-size:.75rem;font-weight:500;background:rgba(232,239,98,.1);color:var(--lime);border:1px solid rgba(232,239,98,.2)}
+  .card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:32px;transition:border-color .2s,transform .2s}
+  .card:hover{border-color:var(--border-light);transform:translateY(-2px)}
+  /* HERO */
+  .hero{min-height:calc(100vh - 72px);display:flex;align-items:center;padding:80px 5vw;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 70% 50%,rgba(33,107,99,.12) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 30% 20%,rgba(232,239,98,.04) 0%,transparent 60%);pointer-events:none}
+  .hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:64px 64px;opacity:.4;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 80%);pointer-events:none}
+  .hero-inner{max-width:1160px;margin:0 auto;position:relative;z-index:1}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;padding:6px 14px;border-radius:100px;background:rgba(232,239,98,.08);border:1px solid rgba(232,239,98,.2);font-size:.8rem;font-weight:500;color:var(--lime);margin-bottom:32px;letter-spacing:.04em}
+  .hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--lime);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .hero h1{max-width:760px;margin-bottom:28px}
+  .hero h1 .accent{color:var(--lime)}
+  .hero-sub{font-size:1.125rem;color:var(--text-muted);max-width:560px;line-height:1.7;margin-bottom:44px}
+  .hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .hero-stats{margin-top:96px;padding-top:48px;border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+  .stat-num{font-size:2rem;font-weight:700;letter-spacing:-.03em;color:var(--text);line-height:1}
+  .stat-num span{color:var(--lime)}
+  .stat-label{font-size:.8rem;color:var(--text-muted);margin-top:6px;line-height:1.4}
+  /* SERVICES GRID */
+  .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:56px}
+  .service-tile{background:var(--bg2);padding:48px 40px;border:1px solid var(--border);transition:background .2s,border-color .2s;cursor:pointer;position:relative;overflow:hidden}
+  .service-tile:first-child{border-radius:12px 0 0 0}
+  .service-tile:nth-child(2){border-radius:0 12px 0 0}
+  .service-tile:nth-child(3){border-radius:0 0 0 12px}
+  .service-tile:last-child{border-radius:0 0 12px 0}
+  .service-tile:hover{background:var(--bg3);border-color:var(--border-light)}
+  .service-tile::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--lime);opacity:0;transition:opacity .2s}
+  .service-tile:hover::after{opacity:1}
+  .service-num{font-size:.75rem;font-weight:600;color:var(--lime);letter-spacing:.08em;margin-bottom:20px}
+  .service-tile h3{font-size:1.2rem;margin-bottom:12px;color:var(--text)}
+  .service-tile p{font-size:.9rem;line-height:1.65}
+  .service-tile .arrow{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;color:var(--lime);margin-top:24px;font-weight:500;transition:gap .2s}
+  .service-tile:hover .arrow{gap:10px}
+  /* WHY */
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .why-points{display:flex;flex-direction:column;gap:20px}
+  .why-point{display:flex;gap:16px;padding:20px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;transition:border-color .2s}
+  .why-point:hover{border-color:var(--teal)}
+  .why-point-icon{flex-shrink:0;width:36px;height:36px;background:rgba(232,239,98,.1);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--lime)}
+  .why-point-icon svg{width:16px;height:16px}
+  .why-point p{font-size:.875rem}
+  .why-visual{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:40px;position:relative;overflow:hidden}
+  .why-visual::before{content:'';position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(ellipse at top right,rgba(232,239,98,.08),transparent 70%)}
+  .outcome-list{display:flex;flex-direction:column;gap:16px}
+  .outcome-item{display:flex;align-items:flex-start;gap:12px;padding:16px;background:var(--bg3);border-radius:8px;border:1px solid var(--border)}
+  .outcome-check{flex-shrink:0;width:20px;height:20px;background:rgba(232,239,98,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .outcome-check svg{width:10px;height:10px;color:var(--lime)}
+  .outcome-text{font-size:.875rem;color:var(--text-muted)}
+  .outcome-text strong{color:var(--text);display:block;margin-bottom:2px}
+  /* USE CASES */
+  .use-cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+  .use-case-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:32px;transition:border-color .2s,transform .2s}
+  .use-case-card:hover{border-color:var(--teal);transform:translateY(-3px)}
+  .use-case-tag{display:inline-block;margin-bottom:16px;padding:4px 10px;border-radius:4px;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:rgba(33,107,99,.15);color:var(--teal-light);border:1px solid rgba(33,107,99,.25)}
+  .use-case-card h3{font-size:1.05rem;margin-bottom:10px}
+  .use-case-card p{font-size:.875rem}
+  .use-case-result{margin-top:20px;padding-top:20px;border-top:1px solid var(--border);font-size:.8rem;color:var(--lime);font-weight:500}
+  /* CTA BAND */
+  .cta-band{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:72px 64px;display:flex;align-items:center;justify-content:space-between;gap:48px;margin:80px 0;position:relative;overflow:hidden}
+  .cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 80% at 80% 50%,rgba(33,107,99,.1),transparent);pointer-events:none}
+  .cta-band h2{max-width:520px}
+  .cta-band-actions{flex-shrink:0;display:flex;flex-direction:column;gap:12px;align-items:flex-end}
+  .cta-band-actions .note{font-size:.8rem;color:var(--text-dim)}
+  /* SERVICES PAGE */
+  .services-hero{padding:80px 5vw 64px}
+  .services-hero-inner{max-width:1160px;margin:0 auto}
+  .services-nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:48px;padding-top:40px;border-top:1px solid var(--border)}
+  .services-nav-btn{padding:8px 18px;border-radius:6px;font-size:.85rem;font-weight:500;background:var(--bg2);border:1px solid var(--border);color:var(--text-muted);cursor:pointer;transition:all .2s;font-family:var(--font)}
+  .services-nav-btn:hover,.services-nav-btn.active{background:rgba(232,239,98,.08);border-color:rgba(232,239,98,.25);color:var(--lime)}
+  .service-block{padding:80px 5vw;border-top:1px solid var(--border)}
+  .service-block:nth-child(odd){background:var(--bg2)}
+  .service-block-inner{max-width:1160px;margin:0 auto}
+  .service-block-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:start}
+  .service-block-grid.reverse{grid-template-columns:1.4fr 1fr}
+  .service-block-grid.reverse .service-block-left{order:2}
+  .service-block-grid.reverse .service-block-right{order:1}
+  .service-block-num{font-size:.75rem;font-weight:700;letter-spacing:.12em;color:var(--teal-light);margin-bottom:12px;text-transform:uppercase}
+  .service-block h2{font-size:clamp(1.5rem,2.5vw,2rem);margin-bottom:16px}
+  .service-block .problem{background:rgba(255,80,80,.06);border:1px solid rgba(255,80,80,.15);border-radius:8px;padding:16px 20px;font-size:.875rem;color:#e07070;margin-bottom:24px}
+  .service-block .problem::before{content:'The problem: ';font-weight:600}
+  .service-block.es-page .problem::before{content:'El problema: '}
+  .outcomes-box{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:28px}
+  .outcomes-box h4{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px}
+  .outcomes-box ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .outcomes-box li{display:flex;gap:10px;align-items:flex-start;font-size:.875rem;color:var(--text-muted)}
+  .outcomes-box li::before{content:'→';color:var(--lime);flex-shrink:0;font-weight:700}
+  .approach-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  /* APPROACH */
+  .phases-container{max-width:1160px;margin:0 auto;padding:0 5vw 96px}
+  .phase{display:grid;grid-template-columns:80px 1fr;gap:0 48px;padding:0 0 64px;position:relative}
+  .phase:not(:last-child)::after{content:'';position:absolute;left:38px;top:60px;bottom:-4px;width:2px;background:linear-gradient(to bottom,var(--teal),transparent)}
+  .phase-num-badge{width:56px;height:56px;background:var(--bg2);border:2px solid var(--teal);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:700;color:var(--lime);position:relative;z-index:1}
+  .phase-duration{font-size:.78rem;color:var(--teal-light);font-weight:500;margin-bottom:16px;letter-spacing:.04em}
+  .phase-content p{max-width:560px;margin-bottom:24px}
+  .phase-activities{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .activity-item{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px 16px;font-size:.85rem;color:var(--text-muted)}
+  .activity-item strong{color:var(--text);display:block;font-size:.8rem;margin-bottom:3px}
+  .principles-band{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:72px 5vw}
+  .principles-grid{max-width:1160px;margin:40px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+  .principle-item{padding:28px;border-radius:10px;background:var(--bg3);border:1px solid var(--border)}
+  .principle-item p{font-size:.875rem}
+  /* INDUSTRIES */
+  .industry-block{padding:80px 5vw;border-top:1px solid var(--border)}
+  .industry-block:nth-child(even){background:var(--bg2)}
+  .industry-block-inner{max-width:1160px;margin:0 auto}
+  .industry-icon-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(33,107,99,.12);border:1px solid rgba(33,107,99,.25);border-radius:8px;padding:8px 14px;margin-bottom:20px;font-size:.8rem;font-weight:600;color:var(--teal-light);letter-spacing:.06em;text-transform:uppercase}
+  .challenges-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .challenge-item{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px 20px;font-size:.875rem;color:var(--text-muted)}
+  .challenge-item strong{display:block;color:var(--text);margin-bottom:4px;font-size:.85rem}
+  .industry-challenges h4{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px}
+  .solutions-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .solution-item{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:24px;transition:border-color .2s}
+  .solution-item:hover{border-color:var(--teal)}
+  .solution-item h4{margin-bottom:8px;font-size:.95rem}
+  .solution-item p{font-size:.875rem}
+  /* ABOUT */
+  .about-story{padding:80px 5vw;max-width:1160px;margin:0 auto}
+  .about-story-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+  .about-story p{margin-bottom:16px}
+  .values-section{padding:80px 5vw;background:var(--bg2);border-top:1px solid var(--border)}
+  .values-inner{max-width:1160px;margin:0 auto}
+  .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+  .value-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:32px}
+  .value-num{font-size:2rem;font-weight:800;color:var(--border-light);line-height:1;margin-bottom:16px;letter-spacing:-.04em}
+  .capabilities-section{padding:80px 5vw}
+  .capabilities-inner{max-width:1160px;margin:0 auto}
+  .capabilities-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:48px}
+  .cap-item{background:var(--bg2);border:1px solid var(--border);padding:28px 32px;display:flex;align-items:center;gap:20px;transition:background .2s}
+  .cap-item:hover{background:var(--bg3)}
+  .cap-dot{width:8px;height:8px;border-radius:50%;background:var(--lime);flex-shrink:0}
+  .cap-text p{font-size:.825rem}
+  /* CONTACT */
+  .contact-layout{max-width:1160px;margin:0 auto;padding:0 5vw 96px;display:grid;grid-template-columns:1fr 1.4fr;gap:80px}
+  .contact-details{display:flex;flex-direction:column;gap:16px;margin-bottom:40px}
+  .contact-detail{display:flex;gap:14px;align-items:flex-start;padding:16px;background:var(--bg2);border:1px solid var(--border);border-radius:8px}
+  .contact-detail-icon{width:34px;height:34px;flex-shrink:0;background:rgba(33,107,99,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--teal-light)}
+  .contact-detail-icon svg{width:15px;height:15px}
+  .contact-detail-text .label{font-size:.75rem;color:var(--text-dim);margin-bottom:2px}
+  .contact-detail-text .value{font-size:.9rem;color:var(--text);font-weight:500}
+  .contact-form-wrapper{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:48px}
+  .form-sub{font-size:.875rem;color:var(--text-dim);margin-bottom:32px}
+  .form-group{margin-bottom:20px}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  label{display:block;font-size:.8rem;font-weight:500;color:var(--text-muted);margin-bottom:8px}
+  input,textarea,select{width:100%;padding:12px 16px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--font);font-size:.9rem;transition:border-color .2s,box-shadow .2s;outline:none}
+  input:focus,textarea:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(33,107,99,.12)}
+  textarea{resize:vertical;min-height:120px}
+  select option{background:var(--bg3)}
+  .form-submit{margin-top:28px}
+  .form-submit .btn{width:100%;justify-content:center}
+  .form-note{font-size:.78rem;color:var(--text-dim);margin-top:12px;text-align:center}
+  /* FOOTER */
+  footer{background:var(--bg2);border-top:1px solid var(--border);padding:64px 5vw 32px}
+  .footer-inner{max-width:1160px;margin:0 auto}
+  .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid var(--border);margin-bottom:32px}
+  .footer-brand p{font-size:.875rem;color:var(--text-muted);margin-top:16px;max-width:280px}
+  .footer-brand img{height:48px;width:auto;margin-bottom:8px}
+  .footer-col h5{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .footer-col li a{font-size:.875rem;color:var(--text-muted);transition:color .2s;cursor:pointer}
+  .footer-col li a:hover{color:var(--lime)}
+  .footer-bottom{display:flex;align-items:center;justify-content:space-between;font-size:.8rem;color:var(--text-dim)}
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .nav-links{display:none}
+    .nav-mobile-btn{display:block}
+    .nav-links.open{display:flex;flex-direction:column;position:fixed;top:72px;left:0;right:0;bottom:0;background:var(--bg);padding:24px 5vw;gap:4px;align-items:flex-start;z-index:99}
+    .nav-links.open a{font-size:1.1rem;padding:12px 0;width:100%}
+    .hero-stats{grid-template-columns:repeat(2,1fr);gap:24px}
+    .services-grid,.use-cases-grid,.values-grid,.about-story-grid,.challenges-grid,.principles-grid{grid-template-columns:1fr}
+    .why-grid{grid-template-columns:1fr;gap:48px}
+    .cta-band{flex-direction:column;padding:48px 32px}
+    .cta-band-actions{align-items:flex-start}
+    .service-block-grid,.service-block-grid.reverse{grid-template-columns:1fr;gap:40px}
+    .service-block-grid.reverse .service-block-left,.service-block-grid.reverse .service-block-right{order:0}
+    .phase{grid-template-columns:1fr}
+    .phase::after{display:none}
+    .phase-num-badge{display:none}
+    .phase-activities{grid-template-columns:1fr}
+    .contact-layout{grid-template-columns:1fr;gap:48px}
+    .form-row{grid-template-columns:1fr}
+    .footer-top{grid-template-columns:1fr 1fr;gap:32px}
+    .footer-brand{grid-column:1/-1}
+    .solutions-grid,.capabilities-grid{grid-template-columns:1fr}
+    .footer-bottom{flex-direction:column;gap:8px;text-align:center}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#" onclick="showPage('home');return false">
+    <img src="see4tech-nav-logo.png" alt="See4Tech">
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a onclick="showPage('home');return false" class="active" data-page="home" data-en="Home" data-es="Inicio">Home</a></li>
+    <li><a onclick="showPage('services');return false" data-page="services" data-en="Services" data-es="Servicios">Services</a></li>
+    <li><a onclick="showPage('approach');return false" data-page="approach" data-en="Approach" data-es="Enfoque">Approach</a></li>
+    <li><a onclick="showPage('industries');return false" data-page="industries" data-en="Industries" data-es="Industrias">Industries</a></li>
+    <li><a onclick="showPage('about');return false" data-page="about" data-en="About" data-es="Nosotros">About</a></li>
+    <li><a onclick="showPage('contact');return false" class="nav-cta" data-page="contact" data-en="Start a Conversation" data-es="Iniciar Conversación">Start a Conversation</a></li>
+    <li>
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btn-en" onclick="setLanguage('en')">EN</button>
+        <button class="lang-btn" id="btn-es" onclick="setLanguage('es')">ES</button>
+      </div>
+    </li>
+  </ul>
+  <button class="nav-mobile-btn" onclick="toggleMobileNav()" aria-label="Menu">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/>
+    </svg>
+  </button>
+</nav>
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-grid-bg"></div>
+    <div class="hero-inner">
+      <div id="hero-content">
+        <div class="hero-eyebrow" data-en="Strategic Technology Consulting" data-es="Consultoría Tecnológica Estratégica">Strategic Technology Consulting</div>
+        <h1 id="hero-h1">Systems that hold your<br><span class="accent">operations together</span><br>shouldn't slow you down.</h1>
+        <p class="hero-sub" id="hero-sub">See4 Tech designs and integrates the technology infrastructure enterprise operations depend on — from ERP ecosystems and process automation to custom platforms built around how your business actually works.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" onclick="showPage('contact');return false" data-en="Start a Conversation" data-es="Iniciar una Conversación">Start a Conversation
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a class="btn btn-ghost" onclick="showPage('services');return false" data-en="View Services" data-es="Ver Servicios">View Services</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">30<span>+</span></div><div class="stat-label" data-en="Years solving complex enterprise technology problems" data-es="Años resolviendo problemas tecnológicos empresariales complejos">Years solving complex enterprise technology problems</div></div>
+        <div><div class="stat-num">40<span>+</span></div><div class="stat-label" data-en="Enterprise system integrations delivered across industries" data-es="Integraciones de sistemas empresariales entregadas en distintas industrias">Enterprise system integrations delivered across industries</div></div>
+        <div><div class="stat-num">6</div><div class="stat-label" data-en="Countries with active client engagements" data-es="Países con compromisos activos con clientes">Countries with active client engagements</div></div>
+        <div><div class="stat-num">0</div><div class="stat-label" data-en="Cookie-cutter implementations — every engagement is designed from scratch" data-es="Implementaciones estándar — cada compromiso se diseña desde cero">Cookie-cutter implementations — every engagement is designed from scratch</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Preview -->
+  <section class="section" style="background:var(--bg)">
+    <div class="container">
+      <div class="section-label" data-en="What We Do" data-es="Qué Hacemos">What We Do</div>
+      <h2 id="svc-preview-h2">Four disciplines. One mandate: make your systems work.</h2>
+      <div class="services-grid" id="services-tiles">
+        <div class="service-tile" onclick="showPage('services');return false">
+          <div class="service-num">01</div>
+          <h3 data-en="IT Strategy &amp; Transformation" data-es="Estrategia TI y Transformación">IT Strategy &amp; Transformation</h3>
+          <p data-en="A clear-eyed analysis of where your technology stands, where it needs to go, and a sequenced plan that accounts for operational constraints — not just IT theory." data-es="Un análisis objetivo de dónde se encuentra su tecnología, hacia dónde debe ir, y un plan secuenciado que tiene en cuenta las restricciones operativas — no solo la teoría de TI.">A clear-eyed analysis of where your technology stands, where it needs to go, and a sequenced plan that accounts for operational constraints — not just IT theory.</p>
+          <div class="arrow" data-en="Learn more" data-es="Saber más">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="service-tile" onclick="showPage('services');return false">
+          <div class="service-num">02</div>
+          <h3 data-en="Systems Integration" data-es="Integración de Sistemas">Systems Integration</h3>
+          <p data-en="Connecting ERP platforms, operational software, and third-party APIs into cohesive data flows — eliminating the manual handoffs and reconciliation cycles that consume your team's time." data-es="Conectar plataformas ERP, software operativo y APIs de terceros en flujos de datos coherentes — eliminando los traspasos manuales y ciclos de conciliación que consumen el tiempo de su equipo.">Connecting ERP platforms, operational software, and third-party APIs into cohesive data flows — eliminating the manual handoffs and reconciliation cycles that consume your team's time.</p>
+          <div class="arrow" data-en="Learn more" data-es="Saber más">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="service-tile" onclick="showPage('services');return false">
+          <div class="service-num">03</div>
+          <h3 data-en="Automation &amp; Process Optimization" data-es="Automatización y Optimización de Procesos">Automation &amp; Process Optimization</h3>
+          <p data-en="Identifying the manual processes that are costing you the most — in time, errors, and staff capacity — and replacing them with reliable, auditable automated workflows." data-es="Identificar los procesos manuales que más le cuestan — en tiempo, errores y capacidad del personal — y reemplazarlos con flujos de trabajo automatizados, confiables y auditables.">Identifying the manual processes that are costing you the most — in time, errors, and staff capacity — and replacing them with reliable, auditable automated workflows.</p>
+          <div class="arrow" data-en="Learn more" data-es="Saber más">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+        <div class="service-tile" onclick="showPage('services');return false">
+          <div class="service-num">04</div>
+          <h3 data-en="Custom Development" data-es="Desarrollo a Medida">Custom Development</h3>
+          <p data-en="When off-the-shelf doesn't fit your operational reality, we build software that does — with architecture designed for scale, security, and the integrations you'll need on day one and year five." data-es="Cuando las soluciones estándar no se ajustan a su realidad operativa, construimos software que sí lo hace — con arquitectura diseñada para escala, seguridad y las integraciones que necesitará desde el primer día.">When off-the-shelf doesn't fit your operational reality, we build software that does — with architecture designed for scale, security, and the integrations you'll need on day one and year five.</p>
+          <div class="arrow" data-en="Learn more" data-es="Saber más">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Section -->
+  <section class="section" style="background:var(--bg2);border-top:1px solid var(--border)">
+    <div class="container">
+      <div class="why-grid">
+        <div>
+          <div class="section-label" data-en="Why See4 Tech" data-es="Por Qué See4 Tech">Why See4 Tech</div>
+          <h2 id="why-h2">We close the gap between what IT promises and what operations require.</h2>
+          <p id="why-p" style="margin-bottom:32px">Most technology failures in enterprise environments aren't caused by bad tools — they're caused by implementations that didn't account for how the business actually operates. We've spent over three decades solving that translation problem.</p>
+          <div class="why-points">
+            <div class="why-point">
+              <div class="why-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></div>
+              <div>
+                <h4 data-en="Architecture before implementation" data-es="Arquitectura antes que implementación">Architecture before implementation</h4>
+                <p data-en="We design the full system landscape before writing the first line of code or configuring the first workflow. It costs time upfront and saves months downstream." data-es="Diseñamos el panorama completo del sistema antes de escribir la primera línea de código. Cuesta tiempo al inicio y ahorra meses después.">We design the full system landscape before writing the first line of code or configuring the first workflow. It costs time upfront and saves months downstream.</p>
+              </div>
+            </div>
+            <div class="why-point">
+              <div class="why-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+              <div>
+                <h4 data-en="Execution, not just advisory" data-es="Ejecución, no solo asesoría">Execution, not just advisory</h4>
+                <p data-en="We deliver working systems, not recommendations decks. Our engagements end with your team running on the infrastructure we built together." data-es="Entregamos sistemas funcionando, no presentaciones de recomendaciones. Nuestros compromisos terminan con su equipo operando la infraestructura que construimos juntos.">We deliver working systems, not recommendations decks. Our engagements end with your team running on the infrastructure we built together.</p>
+              </div>
+            </div>
+            <div class="why-point">
+              <div class="why-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+              <div>
+                <h4 data-en="Specialists, not generalists" data-es="Especialistas, no generalistas">Specialists, not generalists</h4>
+                <p data-en="Every engagement is staffed with people who have hands-on experience in the specific systems and industries involved. We don't learn on your budget." data-es="Cada compromiso es atendido por personas con experiencia práctica en los sistemas e industrias específicos involucrados. No aprendemos a su costo.">Every engagement is staffed with people who have hands-on experience in the specific systems and industries involved. We don't learn on your budget.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="why-visual">
+            <div class="section-label" data-en="Outcomes We Deliver" data-es="Resultados que Entregamos">Outcomes We Deliver</div>
+            <div class="outcome-list">
+              <div class="outcome-item"><div class="outcome-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div class="outcome-text"><strong data-en="Unified data visibility" data-es="Visibilidad de datos unificada">Unified data visibility</strong><span data-en="Finance, operations, and logistics teams working from the same numbers in real time." data-es="Equipos de finanzas, operaciones y logística trabajando con los mismos datos en tiempo real.">Finance, operations, and logistics teams working from the same numbers in real time.</span></div></div>
+              <div class="outcome-item"><div class="outcome-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div class="outcome-text"><strong data-en="Eliminated manual reconciliation" data-es="Conciliación manual eliminada">Eliminated manual reconciliation</strong><span data-en="Processes that previously required days of staff time running automatically with audit trails." data-es="Procesos que antes requerían días de trabajo del personal, ejecutándose automáticamente con registros de auditoría.">Processes that previously required days of staff time running automatically with audit trails.</span></div></div>
+              <div class="outcome-item"><div class="outcome-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div class="outcome-text"><strong data-en="Integration stability" data-es="Estabilidad de integración">Integration stability</strong><span data-en="Systems that stay connected across updates, API changes, and infrastructure migrations." data-es="Sistemas que permanecen conectados a través de actualizaciones, cambios de API y migraciones de infraestructura.">Systems that stay connected across updates, API changes, and infrastructure migrations.</span></div></div>
+              <div class="outcome-item"><div class="outcome-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div class="outcome-text"><strong data-en="Reduced IT dependency" data-es="Menor dependencia de TI">Reduced IT dependency</strong><span data-en="Operational teams that can act on data and manage processes without opening a support ticket." data-es="Equipos operativos que pueden actuar sobre datos y gestionar procesos sin abrir un ticket de soporte.">Operational teams that can act on data and manage processes without opening a support ticket.</span></div></div>
+              <div class="outcome-item"><div class="outcome-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div class="outcome-text"><strong data-en="Scalable architecture" data-es="Arquitectura escalable">Scalable architecture</strong><span data-en="Systems built to absorb growth, new geographies, and additional integrations without full rebuilds." data-es="Sistemas construidos para absorber el crecimiento, nuevas geografías e integraciones adicionales sin reconstrucciones completas.">Systems built to absorb growth, new geographies, and additional integrations without full rebuilds.</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="section">
+    <div class="container">
+      <div class="section-label" data-en="Selected Work" data-es="Trabajo Selecto">Selected Work</div>
+      <h2 id="usecases-h2">Problems we've solved in the field.</h2>
+      <div class="use-cases-grid">
+        <div class="use-case-card">
+          <div class="use-case-tag" data-en="Hospitality · ERP" data-es="Hospitalidad · ERP">Hospitality · ERP</div>
+          <h3 data-en="Property Management to Finance Integration" data-es="Integración de Gestión de Propiedades con Finanzas">Property Management to Finance Integration</h3>
+          <p data-en="A hotel group operating across four countries was closing the books manually each month. Revenue data from the PMS required two days of reconciliation before it reached the finance team — with no audit trail when numbers didn't match." data-es="Un grupo hotelero operando en cuatro países cerraba los libros manualmente cada mes. Los datos de ingresos del PMS requerían dos días de conciliación antes de llegar al equipo de finanzas — sin rastro de auditoría cuando los números no coincidían.">A hotel group operating across four countries was closing the books manually each month. Revenue data from the PMS required two days of reconciliation before it reached the finance team — with no audit trail when numbers didn't match.</p>
+          <div class="use-case-result" data-en="→ 3-day month-end close reduced to same-day automated reconciliation" data-es="→ Cierre mensual de 3 días reducido a conciliación automática el mismo día">→ 3-day month-end close reduced to same-day automated reconciliation</div>
+        </div>
+        <div class="use-case-card">
+          <div class="use-case-tag" data-en="Airport · Operations" data-es="Aeropuerto · Operaciones">Airport · Operations</div>
+          <h3 data-en="Ground Operations Visibility Platform" data-es="Plataforma de Visibilidad de Operaciones en Tierra">Ground Operations Visibility Platform</h3>
+          <p data-en="An airport operator had flight data, equipment tracking, and ground crew systems running in three separate platforms with no shared view. Delays triggered manual coordination across departments via radio and phone." data-es="Un operador aeroportuario tenía datos de vuelo, seguimiento de equipos y sistemas de personal de tierra en tres plataformas separadas sin vista compartida. Los retrasos generaban coordinación manual entre departamentos por radio y teléfono.">An airport operator had flight data, equipment tracking, and ground crew systems running in three separate platforms with no shared view. Delays triggered manual coordination across departments via radio and phone.</p>
+          <div class="use-case-result" data-en="→ Unified operational dashboard with real-time alerts, reducing ground delay incidents by 34%" data-es="→ Panel operativo unificado con alertas en tiempo real, reduciendo incidentes de retraso en tierra un 34%">→ Unified operational dashboard with real-time alerts, reducing ground delay incidents by 34%</div>
+        </div>
+        <div class="use-case-card">
+          <div class="use-case-tag" data-en="Enterprise · Automation" data-es="Empresa · Automatización">Enterprise · Automation</div>
+          <h3 data-en="Procurement-to-Payment Automation" data-es="Automatización de Compras al Pago">Procurement-to-Payment Automation</h3>
+          <p data-en="A regional enterprise was processing 2,000+ monthly purchase orders through email, spreadsheets, and manual ERP entry. Approval cycles averaged nine days and error rates were affecting supplier relationships." data-es="Una empresa regional procesaba más de 2,000 órdenes de compra mensuales mediante correo, hojas de cálculo y entrada manual al ERP. Los ciclos de aprobación promediaban nueve días y las tasas de error afectaban las relaciones con proveedores.">A regional enterprise was processing 2,000+ monthly purchase orders through email, spreadsheets, and manual ERP entry. Approval cycles averaged nine days and error rates were affecting supplier relationships.</p>
+          <div class="use-case-result" data-en="→ End-to-end P2P automation reducing cycle time from 9 days to 18 hours" data-es="→ Automatización P2P de extremo a extremo reduciendo el tiempo de ciclo de 9 días a 18 horas">→ End-to-end P2P automation reducing cycle time from 9 days to 18 hours</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <div class="section-label" data-en="Ready to talk?" data-es="¿Listo para hablar?">Ready to talk?</div>
+        <h2 id="home-cta-h2">Tell us about the system problem you've been working around.</h2>
+      </div>
+      <div class="cta-band-actions">
+        <a class="btn btn-primary" onclick="showPage('contact');return false" data-en="Start a Conversation" data-es="Iniciar una Conversación">Start a Conversation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a class="btn btn-ghost" onclick="showPage('approach');return false" data-en="See Our Approach" data-es="Ver Nuestro Enfoque">See Our Approach</a>
+        <span class="note" data-en="No sales pitch. We start with a 30-minute diagnostic call." data-es="Sin argumentos de venta. Comenzamos con una llamada diagnóstica de 30 minutos.">No sales pitch. We start with a 30-minute diagnostic call.</span>
+      </div>
+    </div>
+  </div>
+</div><!-- /home -->
+
+<!-- SERVICES PAGE -->
+<div class="page" id="page-services">
+  <section class="services-hero">
+    <div class="services-hero-inner">
+      <div class="section-label" data-en="Services" data-es="Servicios">Services</div>
+      <h1 id="svc-h1">Built for environments<br>where failure has a cost.</h1>
+      <p class="lead" id="svc-lead">We don't offer a standard service catalog. Each engagement is assembled around your specific technical landscape, business constraints, and operational requirements.</p>
+      <nav class="services-nav" aria-label="Service navigation">
+        <button class="services-nav-btn active" onclick="scrollToService('strategy',this)" data-en="IT Strategy &amp; Transformation" data-es="Estrategia TI y Transformación">IT Strategy &amp; Transformation</button>
+        <button class="services-nav-btn" onclick="scrollToService('integration',this)" data-en="Systems Integration" data-es="Integración de Sistemas">Systems Integration</button>
+        <button class="services-nav-btn" onclick="scrollToService('automation',this)" data-en="Automation &amp; Process Optimization" data-es="Automatización y Optimización">Automation &amp; Process Optimization</button>
+        <button class="services-nav-btn" onclick="scrollToService('dev',this)" data-en="Custom Development" data-es="Desarrollo a Medida">Custom Development</button>
+      </nav>
+    </div>
+  </section>
+
+  <div class="service-block" id="svc-strategy">
+    <div class="service-block-inner">
+      <div class="service-block-grid">
+        <div class="service-block-left">
+          <div class="service-block-num" data-en="Service 01" data-es="Servicio 01">Service 01</div>
+          <h2 data-en="IT Strategy &amp; Digital Transformation" data-es="Estrategia TI y Transformación Digital">IT Strategy &amp; Digital Transformation</h2>
+          <div class="problem" data-en="Technology decisions are being made without a coherent architecture plan, resulting in platform sprawl, budget overruns, and initiatives that stall before they deliver value." data-es="Las decisiones tecnológicas se toman sin un plan de arquitectura coherente, lo que resulta en proliferación de plataformas, sobrecostos y proyectos que se detienen antes de generar valor.">Technology decisions are being made without a coherent architecture plan, resulting in platform sprawl, budget overruns, and initiatives that stall before they deliver value.</div>
+          <p data-en="Transformation fails when it's driven by vendor roadmaps or internal politics rather than operational reality. We start by mapping your actual technical landscape — not the one on the org chart — and identifying where the real constraints and opportunities are." data-es="La transformación falla cuando la impulsan los roadmaps de proveedores o la política interna. Comenzamos mapeando su panorama técnico real — no el del organigrama — e identificando dónde están las verdaderas restricciones y oportunidades.">Transformation fails when it's driven by vendor roadmaps or internal politics rather than operational reality. We start by mapping your actual technical landscape — not the one on the org chart — and identifying where the real constraints and opportunities are.</p>
+          <p style="margin-top:16px" data-en="Our strategy work is grounded in systems architecture. We don't produce recommendations that your team then has to figure out how to execute. We produce a sequenced plan, with defined responsibilities, that we can implement alongside you." data-es="Nuestro trabajo de estrategia está fundamentado en arquitectura de sistemas. No producimos recomendaciones que su equipo luego debe descubrir cómo ejecutar. Producimos un plan secuenciado, con responsabilidades definidas, que podemos implementar junto a usted.">Our strategy work is grounded in systems architecture. We don't produce recommendations that your team then has to figure out how to execute. We produce a sequenced plan, with defined responsibilities, that we can implement alongside you.</p>
+          <div class="approach-tags">
+            <span class="tag" data-en="Current-state architecture audit" data-es="Auditoría de arquitectura actual">Current-state architecture audit</span>
+            <span class="tag" data-en="Technology portfolio rationalization" data-es="Racionalización del portafolio tecnológico">Technology portfolio rationalization</span>
+            <span class="tag" data-en="Transformation roadmapping" data-es="Hoja de ruta de transformación">Transformation roadmapping</span>
+            <span class="tag" data-en="Vendor selection support" data-es="Soporte en selección de proveedores">Vendor selection support</span>
+            <span class="tag" data-en="Business case development" data-es="Desarrollo del caso de negocio">Business case development</span>
+          </div>
+        </div>
+        <div class="service-block-right">
+          <div class="outcomes-box">
+            <h4 data-en="Business outcomes" data-es="Resultados de negocio">Business outcomes</h4>
+            <ul>
+              <li><span data-en="A technology roadmap your board can fund and your teams can execute — not a slide deck that sits in a drawer" data-es="Una hoja de ruta tecnológica que su junta puede financiar y sus equipos ejecutar — no una presentación que queda en un cajón">A technology roadmap your board can fund and your teams can execute — not a slide deck that sits in a drawer</span></li>
+              <li><span data-en="Elimination of redundant systems running in parallel, reducing licensing costs and operational confusion" data-es="Eliminación de sistemas redundantes en paralelo, reduciendo costos de licencias y confusión operativa">Elimination of redundant systems running in parallel, reducing licensing costs and operational confusion</span></li>
+              <li><span data-en="Clarity on which initiatives to accelerate, which to defer, and which to stop entirely" data-es="Claridad sobre qué iniciativas acelerar, cuáles diferir y cuáles detener por completo">Clarity on which initiatives to accelerate, which to defer, and which to stop entirely</span></li>
+              <li><span data-en="An architecture decision framework that prevents the same fragmentation from recurring three years later" data-es="Un marco de decisiones arquitectónicas que evita que la misma fragmentación reaparezca tres años después">An architecture decision framework that prevents the same fragmentation from recurring three years later</span></li>
+              <li><span data-en="Reduced implementation risk through phased sequencing that keeps operations running throughout the transition" data-es="Riesgo de implementación reducido mediante secuencia por fases que mantiene las operaciones en curso durante la transición">Reduced implementation risk through phased sequencing that keeps operations running throughout the transition</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-block" id="svc-integration">
+    <div class="service-block-inner">
+      <div class="service-block-grid reverse">
+        <div class="service-block-left">
+          <div class="service-block-num" data-en="Service 02" data-es="Servicio 02">Service 02</div>
+          <h2 data-en="Systems Integration" data-es="Integración de Sistemas">Systems Integration</h2>
+          <div class="problem" data-en="Critical business data lives in multiple systems that don't communicate. Teams are extracting, transforming, and re-entering data manually — and still aren't confident the numbers match." data-es="Los datos críticos del negocio viven en múltiples sistemas que no se comunican. Los equipos extraen, transforman y vuelven a ingresar datos manualmente — y aún así no están seguros de que los números coincidan.">Critical business data lives in multiple systems that don't communicate. Teams are extracting, transforming, and re-entering data manually — and still aren't confident the numbers match.</div>
+          <p data-en="Enterprise environments accumulate systems over time. ERP platforms, operational software, CRMs, logistics tools, and financial systems each hold part of the picture. The cost of not connecting them is paid in staff hours, data errors, and decisions made on incomplete information." data-es="Los entornos empresariales acumulan sistemas con el tiempo. Plataformas ERP, software operativo, CRMs, herramientas de logística y sistemas financieros, cada uno con parte del panorama. El costo de no conectarlos se paga en horas del personal, errores de datos y decisiones tomadas con información incompleta.">Enterprise environments accumulate systems over time. ERP platforms, operational software, CRMs, logistics tools, and financial systems each hold part of the picture. The cost of not connecting them is paid in staff hours, data errors, and decisions made on incomplete information.</p>
+          <p style="margin-top:16px" data-en="We design and build integration architectures that are stable over time — not fragile point-to-point connections that break with every software update. Our integrations include monitoring, error handling, and documentation so your team can maintain them without us." data-es="Diseñamos y construimos arquitecturas de integración estables en el tiempo — no conexiones punto a punto frágiles que se rompen con cada actualización. Nuestras integraciones incluyen monitoreo, manejo de errores y documentación para que su equipo pueda mantenerlas sin nosotros.">We design and build integration architectures that are stable over time — not fragile point-to-point connections that break with every software update. Our integrations include monitoring, error handling, and documentation so your team can maintain them without us.</p>
+          <div class="approach-tags">
+            <span class="tag" data-en="SAP integration &amp; extension" data-es="Integración y extensión SAP">SAP integration &amp; extension</span>
+            <span class="tag" data-en="REST / SOAP API development" data-es="Desarrollo de APIs REST / SOAP">REST / SOAP API development</span>
+            <span class="tag" data-en="ETL pipeline design" data-es="Diseño de pipelines ETL">ETL pipeline design</span>
+            <span class="tag" data-en="Real-time data sync" data-es="Sincronización de datos en tiempo real">Real-time data sync</span>
+            <span class="tag" data-en="Integration monitoring &amp; alerting" data-es="Monitoreo y alertas de integración">Integration monitoring &amp; alerting</span>
+          </div>
+        </div>
+        <div class="service-block-right">
+          <div class="outcomes-box">
+            <h4 data-en="Business outcomes" data-es="Resultados de negocio">Business outcomes</h4>
+            <ul>
+              <li><span data-en="Finance and operations working from a single source of truth — without a nightly reconciliation process to get there" data-es="Finanzas y operaciones trabajando desde una única fuente de verdad — sin un proceso de conciliación nocturna para lograrlo">Finance and operations working from a single source of truth — without a nightly reconciliation process to get there</span></li>
+              <li><span data-en="Elimination of duplicate data entry and the errors and delays that accompany it" data-es="Eliminación de la entrada de datos duplicada y los errores y retrasos que la acompañan">Elimination of duplicate data entry and the errors and delays that accompany it</span></li>
+              <li><span data-en="Real-time visibility into operational metrics that previously required pulling reports from three separate systems" data-es="Visibilidad en tiempo real de métricas operativas que antes requerían extraer informes de tres sistemas separados">Real-time visibility into operational metrics that previously required pulling reports from three separate systems</span></li>
+              <li><span data-en="Integration architecture that absorbs vendor updates and infrastructure changes without requiring emergency fixes" data-es="Arquitectura de integración que absorbe actualizaciones de proveedores y cambios de infraestructura sin requerir correcciones de emergencia">Integration architecture that absorbs vendor updates and infrastructure changes without requiring emergency fixes</span></li>
+              <li><span data-en="Audit-ready data flows with full traceability from source to consumption" data-es="Flujos de datos listos para auditoría con trazabilidad completa desde la fuente hasta el consumo">Audit-ready data flows with full traceability from source to consumption</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-block" id="svc-automation">
+    <div class="service-block-inner">
+      <div class="service-block-grid">
+        <div class="service-block-left">
+          <div class="service-block-num" data-en="Service 03" data-es="Servicio 03">Service 03</div>
+          <h2 data-en="Automation &amp; Process Optimization" data-es="Automatización y Optimización de Procesos">Automation &amp; Process Optimization</h2>
+          <div class="problem" data-en="Skilled staff are spending significant portions of their week on processes that follow predictable rules — approvals, data transfers, report generation — because no one has built the automation to replace them." data-es="Personal calificado gasta una parte significativa de su semana en procesos con reglas predecibles — aprobaciones, transferencias de datos, generación de informes — porque nadie ha construido la automatización para reemplazarlos.">Skilled staff are spending significant portions of their week on processes that follow predictable rules — approvals, data transfers, report generation — because no one has built the automation to replace them.</div>
+          <p data-en="Process automation delivers its highest return when applied to the right processes. We begin with a structured analysis of where manual effort is concentrated, what the failure modes are, and what level of human judgment the process actually requires before we propose any automation." data-es="La automatización de procesos entrega su mayor retorno cuando se aplica a los procesos correctos. Comenzamos con un análisis estructurado de dónde se concentra el esfuerzo manual, cuáles son los modos de fallo y qué nivel de juicio humano requiere realmente el proceso antes de proponer cualquier automatización.">Process automation delivers its highest return when applied to the right processes. We begin with a structured analysis of where manual effort is concentrated, what the failure modes are, and what level of human judgment the process actually requires before we propose any automation.</p>
+          <p style="margin-top:16px" data-en="The result is automation that runs reliably, fails gracefully, and gives your team clear visibility into what's happening — rather than black-box systems that generate anxiety every time they run unattended." data-es="El resultado es automatización que funciona de manera confiable, falla con gracia y da a su equipo visibilidad clara de lo que ocurre — en lugar de sistemas opacos que generan ansiedad cada vez que se ejecutan desatendidos.">The result is automation that runs reliably, fails gracefully, and gives your team clear visibility into what's happening — rather than black-box systems that generate anxiety every time they run unattended.</p>
+          <div class="approach-tags">
+            <span class="tag" data-en="Process mapping &amp; analysis" data-es="Mapeo y análisis de procesos">Process mapping &amp; analysis</span>
+            <span class="tag" data-en="Workflow automation (RPA, BPM)" data-es="Automatización de flujos (RPA, BPM)">Workflow automation (RPA, BPM)</span>
+            <span class="tag" data-en="Approval &amp; exception routing" data-es="Enrutamiento de aprobaciones y excepciones">Approval &amp; exception routing</span>
+            <span class="tag" data-en="Scheduled reporting automation" data-es="Automatización de informes programados">Scheduled reporting automation</span>
+            <span class="tag" data-en="Process monitoring dashboards" data-es="Paneles de monitoreo de procesos">Process monitoring dashboards</span>
+          </div>
+        </div>
+        <div class="service-block-right">
+          <div class="outcomes-box">
+            <h4 data-en="Business outcomes" data-es="Resultados de negocio">Business outcomes</h4>
+            <ul>
+              <li><span data-en="Quantified reduction in staff hours spent on rules-based manual processes — measured before and after" data-es="Reducción cuantificada de horas del personal en procesos manuales basados en reglas — medida antes y después">Quantified reduction in staff hours spent on rules-based manual processes — measured before and after</span></li>
+              <li><span data-en="Faster cycle times for approval-dependent processes (procurement, onboarding, compliance sign-off)" data-es="Tiempos de ciclo más rápidos para procesos dependientes de aprobación (compras, incorporación, cumplimiento)">Faster cycle times for approval-dependent processes (procurement, onboarding, compliance sign-off)</span></li>
+              <li><span data-en="Reduced error rates on data-intensive processes with automated validation at each step" data-es="Tasas de error reducidas en procesos intensivos en datos con validación automatizada en cada paso">Reduced error rates on data-intensive processes with automated validation at each step</span></li>
+              <li><span data-en="Reallocation of capacity from routine processing to analysis and exception management" data-es="Reasignación de capacidad del procesamiento rutinario al análisis y gestión de excepciones">Reallocation of capacity from routine processing to analysis and exception management</span></li>
+              <li><span data-en="Audit trails and process logs that satisfy compliance requirements without additional effort" data-es="Rastros de auditoría y registros de procesos que satisfacen los requisitos de cumplimiento sin esfuerzo adicional">Audit trails and process logs that satisfy compliance requirements without additional effort</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="service-block" id="svc-dev">
+    <div class="service-block-inner">
+      <div class="service-block-grid reverse">
+        <div class="service-block-left">
+          <div class="service-block-num" data-en="Service 04" data-es="Servicio 04">Service 04</div>
+          <h2 data-en="Custom Software Development" data-es="Desarrollo de Software a Medida">Custom Software Development</h2>
+          <div class="problem" data-en="The platform you need doesn't exist, the one you're using can't be extended to fit your requirements, or the vendor's roadmap doesn't align with your operational timeline." data-es="La plataforma que necesita no existe, la que usa no puede extenderse para cumplir sus requisitos, o el roadmap del proveedor no se alinea con su calendario operativo.">The platform you need doesn't exist, the one you're using can't be extended to fit your requirements, or the vendor's roadmap doesn't align with your operational timeline.</div>
+          <p data-en="Custom software is the right answer in specific situations — when a process is genuinely unique to your business, when an off-the-shelf tool would require excessive workarounds, or when integration complexity demands a custom layer. We're direct about when it's the right answer and when it isn't." data-es="El software personalizado es la respuesta correcta en situaciones específicas — cuando un proceso es genuinamente único para su negocio, cuando una herramienta estándar requeriría soluciones excesivas, o cuando la complejidad de integración exige una capa personalizada. Somos directos sobre cuándo es la respuesta correcta y cuándo no.">Custom software is the right answer in specific situations — when a process is genuinely unique to your business, when an off-the-shelf tool would require excessive workarounds, or when integration complexity demands a custom layer. We're direct about when it's the right answer and when it isn't.</p>
+          <p style="margin-top:16px" data-en="When we do build, we build for longevity. Every system we develop is documented, tested, and architected so that it can be maintained, extended, and integrated as your environment evolves. We don't create software dependencies." data-es="Cuando construimos, construimos para la longevidad. Cada sistema que desarrollamos está documentado, probado y diseñado para poder ser mantenido, extendido e integrado a medida que su entorno evoluciona. No creamos dependencias de software.">When we do build, we build for longevity. Every system we develop is documented, tested, and architected so that it can be maintained, extended, and integrated as your environment evolves. We don't create software dependencies.</p>
+          <div class="approach-tags">
+            <span class="tag" data-en="Web application development" data-es="Desarrollo de aplicaciones web">Web application development</span>
+            <span class="tag" data-en="Internal tooling &amp; dashboards" data-es="Herramientas internas y paneles">Internal tooling &amp; dashboards</span>
+            <span class="tag" data-en="API design &amp; development" data-es="Diseño y desarrollo de APIs">API design &amp; development</span>
+            <span class="tag" data-en="Mobile-ready interfaces" data-es="Interfaces adaptadas para móvil">Mobile-ready interfaces</span>
+            <span class="tag" data-en="Database design &amp; optimization" data-es="Diseño y optimización de bases de datos">Database design &amp; optimization</span>
+          </div>
+        </div>
+        <div class="service-block-right">
+          <div class="outcomes-box">
+            <h4 data-en="Business outcomes" data-es="Resultados de negocio">Business outcomes</h4>
+            <ul>
+              <li><span data-en="Software that fits your actual process rather than a process reshaped to fit the software" data-es="Software que se adapta a su proceso real en lugar de un proceso reformado para adaptarse al software">Software that fits your actual process rather than a process reshaped to fit the software</span></li>
+              <li><span data-en="Integration-first architecture that connects to your existing ERP and operational systems from day one" data-es="Arquitectura con integración prioritaria que se conecta a sus sistemas ERP y operativos existentes desde el primer día">Integration-first architecture that connects to your existing ERP and operational systems from day one</span></li>
+              <li><span data-en="Internal tools that replace the spreadsheet-and-email workflows your teams have been using as a substitute" data-es="Herramientas internas que reemplazan los flujos de trabajo de hojas de cálculo y correo electrónico que sus equipos han estado usando como sustituto">Internal tools that replace the spreadsheet-and-email workflows your teams have been using as a substitute</span></li>
+              <li><span data-en="Documentation and knowledge transfer so your team can manage and extend the system without us" data-es="Documentación y transferencia de conocimiento para que su equipo pueda gestionar y extender el sistema sin nosotros">Documentation and knowledge transfer so your team can manage and extend the system without us</span></li>
+              <li><span data-en="Scalable foundations — built to handle three times your current volume without a rewrite" data-es="Bases escalables — construidas para manejar tres veces su volumen actual sin reescritura">Scalable foundations — built to handle three times your current volume without a rewrite</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <div class="section-label" data-en="Next step" data-es="Siguiente paso">Next step</div>
+        <h2 id="svc-cta-h2">Not sure which service applies to your situation? Start with a conversation.</h2>
+      </div>
+      <div class="cta-band-actions">
+        <a class="btn btn-primary" onclick="showPage('contact');return false" data-en="Talk to us" data-es="Hablemos">Talk to us <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </div>
+</div><!-- /services -->
+
+<!-- APPROACH PAGE -->
+<div class="page" id="page-approach">
+  <section style="padding:80px 5vw 64px">
+    <div style="max-width:1160px;margin:0 auto">
+      <div class="section-label" data-en="Our Approach" data-es="Nuestro Enfoque">Our Approach</div>
+      <h1 id="app-h1">How we go from<br>problem to production.</h1>
+      <p class="lead" id="app-lead">Five structured phases. Each one designed to reduce the risk of the next. No phase is skipped because a client is in a hurry — we've learned what that produces.</p>
+    </div>
+  </section>
+
+  <div class="phases-container">
+    <div class="phase">
+      <div><div class="phase-num-badge">01</div></div>
+      <div>
+        <div class="phase-duration" data-en="Weeks 1–3 · Discovery" data-es="Semanas 1–3 · Descubrimiento">Weeks 1–3 · Discovery</div>
+        <h2 data-en="Understand before designing." data-es="Entender antes de diseñar.">Understand before designing.</h2>
+        <p data-en="We spend the first phase understanding your systems, processes, and constraints as they actually exist — not as they appear in documentation. This means direct conversation with the people who operate the systems daily, not just the people who manage them." data-es="Pasamos la primera fase entendiendo sus sistemas, procesos y restricciones tal como existen realmente — no como aparecen en la documentación. Esto significa conversación directa con las personas que operan los sistemas diariamente, no solo con quienes los administran.">We spend the first phase understanding your systems, processes, and constraints as they actually exist — not as they appear in documentation. This means direct conversation with the people who operate the systems daily, not just the people who manage them.</p>
+        <div class="phase-activities">
+          <div class="activity-item"><strong data-en="Stakeholder interviews" data-es="Entrevistas con partes interesadas">Stakeholder interviews</strong><span data-en="Operations, finance, IT — whoever interacts with the systems in scope" data-es="Operaciones, finanzas, TI — quien interactúa con los sistemas en alcance">Operations, finance, IT — whoever interacts with the systems in scope</span></div>
+          <div class="activity-item"><strong data-en="Technical landscape mapping" data-es="Mapeo del panorama técnico">Technical landscape mapping</strong><span data-en="What's connected to what, where the gaps and redundancies are" data-es="Qué está conectado a qué, dónde están las brechas y redundancias">What's connected to what, where the gaps and redundancies are</span></div>
+          <div class="activity-item"><strong data-en="Process documentation" data-es="Documentación de procesos">Process documentation</strong><span data-en="Current-state process maps with failure points and workarounds identified" data-es="Mapas de procesos del estado actual con puntos de fallo e inconvenientes identificados">Current-state process maps with failure points and workarounds identified</span></div>
+          <div class="activity-item"><strong data-en="Constraint inventory" data-es="Inventario de restricciones">Constraint inventory</strong><span data-en="Security requirements, compliance obligations, vendor lock-in, and budget parameters" data-es="Requisitos de seguridad, obligaciones de cumplimiento, bloqueo de proveedores y parámetros presupuestarios">Security requirements, compliance obligations, vendor lock-in, and budget parameters</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase">
+      <div><div class="phase-num-badge">02</div></div>
+      <div>
+        <div class="phase-duration" data-en="Weeks 3–6 · Architecture &amp; Design" data-es="Semanas 3–6 · Arquitectura y Diseño">Weeks 3–6 · Architecture &amp; Design</div>
+        <h2 data-en="Design the full system before building any of it." data-es="Diseñar el sistema completo antes de construir cualquier parte.">Design the full system before building any of it.</h2>
+        <p data-en="The architecture phase produces a complete technical specification of the solution — including data models, integration patterns, security design, and the interfaces between systems — before implementation begins. Disagreements about scope and approach surface here, not after three months of development." data-es="La fase de arquitectura produce una especificación técnica completa de la solución — incluyendo modelos de datos, patrones de integración, diseño de seguridad e interfaces entre sistemas — antes de que comience la implementación. Los desacuerdos sobre el alcance emergen aquí, no después de tres meses de desarrollo.">The architecture phase produces a complete technical specification of the solution — including data models, integration patterns, security design, and the interfaces between systems — before implementation begins. Disagreements about scope and approach surface here, not after three months of development.</p>
+        <div class="phase-activities">
+          <div class="activity-item"><strong data-en="Solution architecture" data-es="Arquitectura de solución">Solution architecture</strong><span data-en="Component diagram, data flow design, integration patterns, technology selection with rationale" data-es="Diagrama de componentes, diseño de flujo de datos, patrones de integración, selección de tecnología con justificación">Component diagram, data flow design, integration patterns, technology selection with rationale</span></div>
+          <div class="activity-item"><strong data-en="Interface specifications" data-es="Especificaciones de interfaces">Interface specifications</strong><span data-en="API contracts, data schemas, and transformation logic documented before implementation" data-es="Contratos de API, esquemas de datos y lógica de transformación documentados antes de la implementación">API contracts, data schemas, and transformation logic documented before implementation</span></div>
+          <div class="activity-item"><strong data-en="Risk register" data-es="Registro de riesgos">Risk register</strong><span data-en="Known technical and operational risks with mitigation strategies defined upfront" data-es="Riesgos técnicos y operativos conocidos con estrategias de mitigación definidas de antemano">Known technical and operational risks with mitigation strategies defined upfront</span></div>
+          <div class="activity-item"><strong data-en="Implementation plan" data-es="Plan de implementación">Implementation plan</strong><span data-en="Phased delivery sequence, resource requirements, and dependency mapping" data-es="Secuencia de entrega por fases, requisitos de recursos y mapeo de dependencias">Phased delivery sequence, resource requirements, and dependency mapping</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase">
+      <div><div class="phase-num-badge">03</div></div>
+      <div>
+        <div class="phase-duration" data-en="Weeks 5–16 · Implementation" data-es="Semanas 5–16 · Implementación">Weeks 5–16 · Implementation</div>
+        <h2 data-en="Build against the spec. Test against reality." data-es="Construir contra la especificación. Probar contra la realidad.">Build against the spec. Test against reality.</h2>
+        <p data-en="Implementation proceeds in iterations, with working increments reviewed against actual operational requirements at each stage. We don't surface surprises at go-live. Configuration and code decisions are documented as they're made, not reconstructed afterward." data-es="La implementación avanza en iteraciones, con incrementos funcionales revisados contra los requisitos operativos reales en cada etapa. No presentamos sorpresas en el lanzamiento. Las decisiones de configuración y código se documentan mientras se toman, no se reconstruyen después.">Implementation proceeds in iterations, with working increments reviewed against actual operational requirements at each stage. We don't surface surprises at go-live. Configuration and code decisions are documented as they're made, not reconstructed afterward.</p>
+        <div class="phase-activities">
+          <div class="activity-item"><strong data-en="Iterative delivery" data-es="Entrega iterativa">Iterative delivery</strong><span data-en="Working software reviewed every two weeks — not a six-month reveal" data-es="Software funcional revisado cada dos semanas — no una revelación de seis meses">Working software reviewed every two weeks — not a six-month reveal</span></div>
+          <div class="activity-item"><strong data-en="Test environment fidelity" data-es="Fidelidad del entorno de prueba">Test environment fidelity</strong><span data-en="Testing environments that replicate production data volumes and edge cases" data-es="Entornos de prueba que replican volúmenes de datos de producción y casos límite">Testing environments that replicate production data volumes and edge cases</span></div>
+          <div class="activity-item"><strong data-en="Decision log" data-es="Registro de decisiones">Decision log</strong><span data-en="Every significant technical decision recorded with the reasoning and alternatives considered" data-es="Cada decisión técnica significativa registrada con el razonamiento y las alternativas consideradas">Every significant technical decision recorded with the reasoning and alternatives considered</span></div>
+          <div class="activity-item"><strong data-en="Operational readiness" data-es="Preparación operativa">Operational readiness</strong><span data-en="Go-live criteria defined and tracked — not declared by schedule pressure" data-es="Criterios de lanzamiento definidos y rastreados — no declarados por presión del calendario">Go-live criteria defined and tracked — not declared by schedule pressure</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase">
+      <div><div class="phase-num-badge">04</div></div>
+      <div>
+        <div class="phase-duration" data-en="Weeks 14–18 · Integration &amp; Handover" data-es="Semanas 14–18 · Integración y Traspaso">Weeks 14–18 · Integration &amp; Handover</div>
+        <h2 data-en="Connect to your environment. Transfer ownership." data-es="Conectar a su entorno. Transferir la propiedad.">Connect to your environment. Transfer ownership.</h2>
+        <p data-en="Systems don't live in isolation. The integration phase ensures the solution connects correctly with everything it needs to — and that the people responsible for operating it after we leave can actually do so. Knowledge transfer is not a slide deck. It's structured, hands-on, and verified." data-es="Los sistemas no viven en aislamiento. La fase de integración asegura que la solución se conecte correctamente con todo lo que necesita — y que las personas responsables de operarla después de que nos vayamos puedan realmente hacerlo. La transferencia de conocimiento no es una presentación. Es estructurada, práctica y verificada.">Systems don't live in isolation. The integration phase ensures the solution connects correctly with everything it needs to — and that the people responsible for operating it after we leave can actually do so. Knowledge transfer is not a slide deck. It's structured, hands-on, and verified.</p>
+        <div class="phase-activities">
+          <div class="activity-item"><strong data-en="Production integration testing" data-es="Pruebas de integración en producción">Production integration testing</strong><span data-en="Full end-to-end tests in the production environment, not just pre-production" data-es="Pruebas completas de extremo a extremo en el entorno de producción, no solo en pre-producción">Full end-to-end tests in the production environment, not just pre-production</span></div>
+          <div class="activity-item"><strong data-en="Runbook development" data-es="Desarrollo de runbooks">Runbook development</strong><span data-en="Operational procedures for normal operation, monitoring, and incident response" data-es="Procedimientos operativos para operación normal, monitoreo y respuesta a incidentes">Operational procedures for normal operation, monitoring, and incident response</span></div>
+          <div class="activity-item"><strong data-en="Team training" data-es="Capacitación del equipo">Team training</strong><span data-en="Role-specific training for administrators, operators, and end users" data-es="Capacitación específica por rol para administradores, operadores y usuarios finales">Role-specific training for administrators, operators, and end users</span></div>
+          <div class="activity-item"><strong data-en="Rollback procedures" data-es="Procedimientos de reversión">Rollback procedures</strong><span data-en="Documented and tested rollback plans for every critical component" data-es="Planes de reversión documentados y probados para cada componente crítico">Documented and tested rollback plans for every critical component</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="phase">
+      <div><div class="phase-num-badge">05</div></div>
+      <div>
+        <div class="phase-duration" data-en="Months 2–6 post-launch · Optimization" data-es="Meses 2–6 post-lanzamiento · Optimización">Months 2–6 post-launch · Optimization</div>
+        <h2 data-en="Measure. Tune. Extend." data-es="Medir. Ajustar. Extender.">Measure. Tune. Extend.</h2>
+        <p data-en="The first three months of production operation reveal things that no test environment fully replicates. We maintain an active engagement post-launch to address what emerges, capture performance data, and identify where the system should be extended based on how it's actually being used." data-es="Los primeros tres meses de operación en producción revelan cosas que ningún entorno de prueba replica completamente. Mantenemos un compromiso activo post-lanzamiento para abordar lo que emerge, capturar datos de rendimiento e identificar dónde debe extenderse el sistema según cómo se usa realmente.">The first three months of production operation reveal things that no test environment fully replicates. We maintain an active engagement post-launch to address what emerges, capture performance data, and identify where the system should be extended based on how it's actually being used.</p>
+        <div class="phase-activities">
+          <div class="activity-item"><strong data-en="Performance baseline" data-es="Línea base de rendimiento">Performance baseline</strong><span data-en="Operational KPIs measured against pre-implementation benchmarks to quantify impact" data-es="KPIs operativos medidos contra puntos de referencia previos a la implementación para cuantificar el impacto">Operational KPIs measured against pre-implementation benchmarks to quantify impact</span></div>
+          <div class="activity-item"><strong data-en="Issue resolution" data-es="Resolución de incidencias">Issue resolution</strong><span data-en="Priority response to production issues during the stabilization period" data-es="Respuesta prioritaria a problemas de producción durante el período de estabilización">Priority response to production issues during the stabilization period</span></div>
+          <div class="activity-item"><strong data-en="Enhancement backlog" data-es="Backlog de mejoras">Enhancement backlog</strong><span data-en="Structured capture of enhancement requests with business-value prioritization" data-es="Captura estructurada de solicitudes de mejora con priorización por valor de negocio">Structured capture of enhancement requests with business-value prioritization</span></div>
+          <div class="activity-item"><strong data-en="Architecture review" data-es="Revisión de arquitectura">Architecture review</strong><span data-en="Assessment of whether the implemented architecture is meeting load and scalability expectations" data-es="Evaluación de si la arquitectura implementada cumple con las expectativas de carga y escalabilidad">Assessment of whether the implemented architecture is meeting load and scalability expectations</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="principles-band">
+    <div class="container">
+      <div class="section-label" data-en="Operating principles" data-es="Principios operativos">Operating principles</div>
+      <h2 id="principles-h2">What guides every engagement.</h2>
+      <div class="principles-grid">
+        <div class="principle-item">
+          <h4 data-en="Scope discipline" data-es="Disciplina de alcance">Scope discipline</h4>
+          <p data-en="We define scope clearly at the start and manage it actively throughout. Scope creep isn't the client's fault — it's a symptom of insufficient upfront definition, and that's our responsibility to prevent." data-es="Definimos el alcance claramente desde el inicio y lo gestionamos activamente. El desvío de alcance no es culpa del cliente — es un síntoma de una definición inicial insuficiente, y es nuestra responsabilidad prevenirlo.">We define scope clearly at the start and manage it actively throughout. Scope creep isn't the client's fault — it's a symptom of insufficient upfront definition, and that's our responsibility to prevent.</p>
+        </div>
+        <div class="principle-item">
+          <h4 data-en="Direct communication" data-es="Comunicación directa">Direct communication</h4>
+          <p data-en="If something is off track, we say so early — not in the retrospective. Our clients have enough people telling them what they want to hear. We tell them what they need to know." data-es="Si algo está descarrilado, lo decimos temprano — no en la retrospectiva. Nuestros clientes tienen suficientes personas diciéndoles lo que quieren escuchar. Nosotros les decimos lo que necesitan saber.">If something is off track, we say so early — not in the retrospective. Our clients have enough people telling them what they want to hear. We tell them what they need to know.</p>
+        </div>
+        <div class="principle-item">
+          <h4 data-en="No dependency creation" data-es="Sin creación de dependencias">No dependency creation</h4>
+          <p data-en="Every engagement ends with your team owning and capable of operating what we built. We don't architect systems that require us to maintain them indefinitely. Long-term relationships should be earned, not engineered." data-es="Cada compromiso termina con su equipo siendo dueño y capaz de operar lo que construimos. No diseñamos sistemas que requieran que los mantengamos indefinidamente. Las relaciones a largo plazo deben ganarse, no ingenierías.">Every engagement ends with your team owning and capable of operating what we built. We don't architect systems that require us to maintain them indefinitely. Long-term relationships should be earned, not engineered.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <div class="section-label" data-en="Start the process" data-es="Iniciar el proceso">Start the process</div>
+        <h2 id="app-cta-h2">Discovery begins with one conversation about your current situation.</h2>
+      </div>
+      <div class="cta-band-actions">
+        <a class="btn btn-primary" onclick="showPage('contact');return false" data-en="Schedule a Call" data-es="Agendar una Llamada">Schedule a Call <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </div>
+</div><!-- /approach -->
+
+<!-- INDUSTRIES PAGE -->
+<div class="page" id="page-industries">
+  <section style="padding:80px 5vw 64px">
+    <div style="max-width:1160px;margin:0 auto">
+      <div class="section-label" data-en="Industries" data-es="Industrias">Industries</div>
+      <h1 id="ind-h1">Complex environments<br>require specific experience.</h1>
+      <p class="lead" id="ind-lead">We work in industries where operational systems are mission-critical, integration complexity is high, and the cost of getting it wrong is measured in revenue, compliance exposure, or both.</p>
+    </div>
+  </section>
+
+  <div class="industry-block">
+    <div class="industry-block-inner">
+      <div class="industry-icon-badge" data-en="Hospitality &amp; Tourism" data-es="Hospitalidad y Turismo">Hospitality &amp; Tourism</div>
+      <h2 data-en="Where guest experience and back-office operations must run as one." data-es="Donde la experiencia del huésped y las operaciones administrativas deben funcionar como uno.">Where guest experience and back-office operations must run as one.</h2>
+      <p class="lead" style="margin-bottom:40px;max-width:640px" data-en="Hotel groups, resort operators, and tourism conglomerates manage some of the most complex multi-system environments in any industry — property management, reservations, finance, procurement, and loyalty programs, often across multiple properties and currencies." data-es="Grupos hoteleros, operadores de resorts y conglomerados turísticos gestionan algunos de los entornos de múltiples sistemas más complejos de cualquier industria — gestión de propiedades, reservas, finanzas, compras y programas de fidelidad, a menudo en múltiples propiedades y monedas.">Hotel groups, resort operators, and tourism conglomerates manage some of the most complex multi-system environments in any industry — property management, reservations, finance, procurement, and loyalty programs, often across multiple properties and currencies.</p>
+      <div style="margin-bottom:40px">
+        <h4 class="industry-challenges" style="display:block" data-en="Common challenges we solve" data-es="Desafíos comunes que resolvemos">Common challenges we solve</h4>
+        <div class="challenges-grid" style="margin-top:16px">
+          <div class="challenge-item"><strong data-en="Disconnected PMS and Finance" data-es="PMS y Finanzas desconectados">Disconnected PMS and Finance</strong><span data-en="Revenue data requires days of manual reconciliation before it reaches accounting." data-es="Los datos de ingresos requieren días de conciliación manual antes de llegar a contabilidad.">Revenue data requires days of manual reconciliation before it reaches accounting.</span></div>
+          <div class="challenge-item"><strong data-en="Multi-property data silos" data-es="Silos de datos multi-propiedad">Multi-property data silos</strong><span data-en="Group-level reporting requires pulling and consolidating data manually from each location." data-es="Los informes a nivel grupal requieren extraer y consolidar datos manualmente de cada ubicación.">Group-level reporting requires pulling and consolidating data manually from each location.</span></div>
+          <div class="challenge-item"><strong data-en="Procurement fragmentation" data-es="Fragmentación de compras">Procurement fragmentation</strong><span data-en="F&amp;B, housekeeping, and maintenance procurement run on different systems with no consolidated view." data-es="Las compras de A&amp;B, housekeeping y mantenimiento corren en sistemas diferentes sin vista consolidada.">F&amp;B, housekeeping, and maintenance procurement run on different systems with no consolidated view.</span></div>
+        </div>
+      </div>
+      <div class="solutions-grid">
+        <div class="solution-item"><h4 data-en="PMS-to-ERP integration" data-es="Integración PMS a ERP">PMS-to-ERP integration</h4><p data-en="Real-time synchronization of revenue, occupancy, and rate data between your property management system and finance platform — eliminating the nightly batch process and the manual corrections it requires." data-es="Sincronización en tiempo real de datos de ingresos, ocupación y tarifas entre su sistema de gestión de propiedades y la plataforma financiera — eliminando el proceso por lotes nocturno y las correcciones manuales que requiere.">Real-time synchronization of revenue, occupancy, and rate data between your property management system and finance platform — eliminating the nightly batch process and the manual corrections it requires.</p></div>
+        <div class="solution-item"><h4 data-en="Multi-property consolidation" data-es="Consolidación multi-propiedad">Multi-property consolidation</h4><p data-en="Group-level financial and operational visibility across all properties, with automatic currency conversion and intercompany eliminations built into the data flow." data-es="Visibilidad financiera y operativa a nivel grupal en todas las propiedades, con conversión de moneda automática y eliminaciones entre compañías integradas en el flujo de datos.">Group-level financial and operational visibility across all properties, with automatic currency conversion and intercompany eliminations built into the data flow.</p></div>
+        <div class="solution-item"><h4 data-en="F&amp;B procurement automation" data-es="Automatización de compras A&amp;B">F&amp;B procurement automation</h4><p data-en="Automated purchasing workflows connected to inventory management — so par levels trigger purchase orders, approvals route correctly, and actuals flow into the P&amp;L without manual entry." data-es="Flujos de compras automatizados conectados a la gestión de inventario — para que los niveles mínimos generen órdenes de compra, las aprobaciones se enruten correctamente y los reales fluyan al P&amp;L sin entrada manual.">Automated purchasing workflows connected to inventory management — so par levels trigger purchase orders, approvals route correctly, and actuals flow into the P&amp;L without manual entry.</p></div>
+        <div class="solution-item"><h4 data-en="Operational reporting platform" data-es="Plataforma de informes operativos">Operational reporting platform</h4><p data-en="A single dashboard pulling occupancy, RevPAR, cost per occupied room, and operational metrics from all source systems — available in real time to property managers and group leadership." data-es="Un panel único que extrae ocupación, RevPAR, costo por habitación ocupada y métricas operativas de todos los sistemas fuente — disponible en tiempo real para gerentes de propiedad y liderazgo grupal.">A single dashboard pulling occupancy, RevPAR, cost per occupied room, and operational metrics from all source systems — available in real time to property managers and group leadership.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="industry-block">
+    <div class="industry-block-inner">
+      <div class="industry-icon-badge" data-en="Airport &amp; Ground Operations" data-es="Aeropuerto y Operaciones en Tierra">Airport &amp; Ground Operations</div>
+      <h2 data-en="Real-time systems for environments where delays compound." data-es="Sistemas en tiempo real para entornos donde los retrasos se acumulan.">Real-time systems for environments where delays compound.</h2>
+      <p class="lead" style="margin-bottom:40px;max-width:640px" data-en="Airport operators, ground handling companies, and aviation service providers manage high-frequency operations where information latency directly impacts performance. The cost of disconnected systems isn't measured in spreadsheet hours — it's measured in missed slots, delayed aircraft, and SLA penalties." data-es="Los operadores aeroportuarios, empresas de handling en tierra y proveedores de servicios de aviación gestionan operaciones de alta frecuencia donde la latencia de información impacta directamente el rendimiento. El costo de sistemas desconectados no se mide en horas de hoja de cálculo — se mide en franjas perdidas, aeronaves retrasadas y penalidades por SLA.">Airport operators, ground handling companies, and aviation service providers manage high-frequency operations where information latency directly impacts performance. The cost of disconnected systems isn't measured in spreadsheet hours — it's measured in missed slots, delayed aircraft, and SLA penalties.</p>
+      <div style="margin-bottom:40px">
+        <h4 class="industry-challenges" style="display:block" data-en="Common challenges we solve" data-es="Desafíos comunes que resolvemos">Common challenges we solve</h4>
+        <div class="challenges-grid" style="margin-top:16px">
+          <div class="challenge-item"><strong data-en="Fragmented operational data" data-es="Datos operativos fragmentados">Fragmented operational data</strong><span data-en="Flight data, equipment status, and ground crew positions live in separate systems with no unified operational view." data-es="Los datos de vuelo, estado del equipo y posiciones del personal en tierra viven en sistemas separados sin una vista operativa unificada.">Flight data, equipment status, and ground crew positions live in separate systems with no unified operational view.</span></div>
+          <div class="challenge-item"><strong data-en="Manual delay coordination" data-es="Coordinación manual de retrasos">Manual delay coordination</strong><span data-en="Delay notifications and resource reallocation happen by radio and phone, creating lag and coordination errors during peak periods." data-es="Las notificaciones de retraso y la reasignación de recursos ocurren por radio y teléfono, creando demoras y errores de coordinación en períodos pico.">Delay notifications and resource reallocation happen by radio and phone, creating lag and coordination errors during peak periods.</span></div>
+          <div class="challenge-item"><strong data-en="Billing and reconciliation gaps" data-es="Brechas en facturación y conciliación">Billing and reconciliation gaps</strong><span data-en="Ground handling charges are calculated manually after operations, creating invoice disputes and revenue leakage." data-es="Los cargos de handling en tierra se calculan manualmente después de las operaciones, creando disputas de facturas y pérdida de ingresos.">Ground handling charges are calculated manually after operations, creating invoice disputes and revenue leakage.</span></div>
+        </div>
+      </div>
+      <div class="solutions-grid">
+        <div class="solution-item"><h4 data-en="Unified operations platform" data-es="Plataforma de operaciones unificada">Unified operations platform</h4><p data-en="Integration of flight data feeds, equipment tracking, and crew management into a single operational view — with configurable alerts for schedule deviations and resource conflicts." data-es="Integración de feeds de datos de vuelo, seguimiento de equipos y gestión de tripulación en una vista operativa única — con alertas configurables para desviaciones de horario y conflictos de recursos.">Integration of flight data feeds, equipment tracking, and crew management into a single operational view — with configurable alerts for schedule deviations and resource conflicts.</p></div>
+        <div class="solution-item"><h4 data-en="Automated ground handling billing" data-es="Facturación automática de handling en tierra">Automated ground handling billing</h4><p data-en="Service events captured at point of execution, automatically validated against contracted service levels and fed into billing — reducing the billing cycle from days to hours." data-es="Eventos de servicio capturados en el punto de ejecución, validados automáticamente contra los niveles de servicio contratados y alimentados a facturación — reduciendo el ciclo de facturación de días a horas.">Service events captured at point of execution, automatically validated against contracted service levels and fed into billing — reducing the billing cycle from days to hours.</p></div>
+        <div class="solution-item"><h4 data-en="SLA monitoring and reporting" data-es="Monitoreo e informes de SLA">SLA monitoring and reporting</h4><p data-en="Real-time tracking of turnaround time targets, on-block performance, and service delivery KPIs — with historical trending for capacity planning and contract negotiations." data-es="Seguimiento en tiempo real de objetivos de tiempo de rotación, rendimiento en bloque y KPIs de entrega de servicios — con tendencias históricas para planificación de capacidad y negociaciones de contratos.">Real-time tracking of turnaround time targets, on-block performance, and service delivery KPIs — with historical trending for capacity planning and contract negotiations.</p></div>
+        <div class="solution-item"><h4 data-en="Slot and resource optimization" data-es="Optimización de franjas y recursos">Slot and resource optimization</h4><p data-en="Equipment and personnel allocation tools that give operations managers a real-time view of resource utilization and allow proactive reallocation before delays occur." data-es="Herramientas de asignación de equipos y personal que brindan a los gerentes de operaciones una vista en tiempo real de la utilización de recursos y permiten la reasignación proactiva antes de que ocurran retrasos.">Equipment and personnel allocation tools that give operations managers a real-time view of resource utilization and allow proactive reallocation before delays occur.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="industry-block">
+    <div class="industry-block-inner">
+      <div class="industry-icon-badge" data-en="Enterprise Back-Office" data-es="Back-Office Empresarial">Enterprise Back-Office</div>
+      <h2 data-en="ERP-centric environments where the core system rarely works alone." data-es="Entornos centrados en ERP donde el sistema central raramente trabaja solo.">ERP-centric environments where the core system rarely works alone.</h2>
+      <p class="lead" style="margin-bottom:40px;max-width:640px" data-en="Large and upper-mid-market enterprises running SAP, Oracle, or comparable ERP platforms face a consistent challenge: the core system covers the accounting, but operations, procurement, logistics, and HR each run partially or entirely outside it — and keeping them synchronized is a permanent problem." data-es="Las grandes empresas y las del mercado medio-alto que ejecutan SAP, Oracle o plataformas ERP comparables enfrentan un desafío consistente: el sistema central cubre la contabilidad, pero operaciones, compras, logística y RRHH cada uno corre parcial o completamente fuera de él — y mantenerlos sincronizados es un problema permanente.">Large and upper-mid-market enterprises running SAP, Oracle, or comparable ERP platforms face a consistent challenge: the core system covers the accounting, but operations, procurement, logistics, and HR each run partially or entirely outside it — and keeping them synchronized is a permanent problem.</p>
+      <div style="margin-bottom:40px">
+        <h4 class="industry-challenges" style="display:block" data-en="Common challenges we solve" data-es="Desafíos comunes que resolvemos">Common challenges we solve</h4>
+        <div class="challenges-grid" style="margin-top:16px">
+          <div class="challenge-item"><strong data-en="ERP satellite fragmentation" data-es="Fragmentación de satélites ERP">ERP satellite fragmentation</strong><span data-en="Dozens of point solutions running alongside the ERP — each integrated differently, each requiring separate maintenance." data-es="Docenas de soluciones puntuales corriendo junto al ERP — cada una integrada de manera diferente, cada una requiriendo mantenimiento separado.">Dozens of point solutions running alongside the ERP — each integrated differently, each requiring separate maintenance.</span></div>
+          <div class="challenge-item"><strong data-en="Master data inconsistency" data-es="Inconsistencia de datos maestros">Master data inconsistency</strong><span data-en="Vendor, customer, and product master data maintained in multiple places, with routine conflicts and no authoritative source." data-es="Datos maestros de proveedores, clientes y productos mantenidos en múltiples lugares, con conflictos rutinarios y sin fuente autorizada.">Vendor, customer, and product master data maintained in multiple places, with routine conflicts and no authoritative source.</span></div>
+          <div class="challenge-item"><strong data-en="Report extraction dependency" data-es="Dependencia de extracción de informes">Report extraction dependency</strong><span data-en="Operational decisions depend on reports that require significant IT involvement to generate — creating a permanent bottleneck." data-es="Las decisiones operativas dependen de informes que requieren participación significativa de TI para generarse — creando un cuello de botella permanente.">Operational decisions depend on reports that require significant IT involvement to generate — creating a permanent bottleneck.</span></div>
+        </div>
+      </div>
+      <div class="solutions-grid">
+        <div class="solution-item"><h4 data-en="SAP integration architecture" data-es="Arquitectura de integración SAP">SAP integration architecture</h4><p data-en="Design and implementation of a sustainable integration layer between SAP and your operational systems — using appropriate middleware where the volume and complexity justify it, direct APIs where they don't." data-es="Diseño e implementación de una capa de integración sostenible entre SAP y sus sistemas operativos — usando middleware apropiado donde el volumen y la complejidad lo justifican, APIs directas donde no.">Design and implementation of a sustainable integration layer between SAP and your operational systems — using appropriate middleware where the volume and complexity justify it, direct APIs where they don't.</p></div>
+        <div class="solution-item"><h4 data-en="Master data governance" data-es="Gobernanza de datos maestros">Master data governance</h4><p data-en="A master data management framework with defined ownership, validation rules, and synchronization logic — so your ERP, CRM, and operational systems work from the same vendor and product records." data-es="Un marco de gestión de datos maestros con propiedad definida, reglas de validación y lógica de sincronización — para que su ERP, CRM y sistemas operativos trabajen con los mismos registros de proveedores y productos.">A master data management framework with defined ownership, validation rules, and synchronization logic — so your ERP, CRM, and operational systems work from the same vendor and product records.</p></div>
+        <div class="solution-item"><h4 data-en="Self-service reporting layer" data-es="Capa de informes de autoservicio">Self-service reporting layer</h4><p data-en="Operational data made accessible to business users through governed, documented data models — reducing IT reporting queue volume and enabling faster decision-making." data-es="Datos operativos accesibles para usuarios de negocio a través de modelos de datos gobernados y documentados — reduciendo el volumen de la cola de informes de TI y habilitando una toma de decisiones más rápida.">Operational data made accessible to business users through governed, documented data models — reducing IT reporting queue volume and enabling faster decision-making.</p></div>
+        <div class="solution-item"><h4 data-en="P2P and O2C process automation" data-es="Automatización de procesos P2P y O2C">P2P and O2C process automation</h4><p data-en="End-to-end automation of procure-to-pay and order-to-cash processes, with ERP integration at each step — eliminating manual handoffs and the errors and delays they produce." data-es="Automatización de extremo a extremo de los procesos de compra-a-pago y pedido-a-cobro, con integración ERP en cada paso — eliminando los traspasos manuales y los errores y retrasos que producen.">End-to-end automation of procure-to-pay and order-to-cash processes, with ERP integration at each step — eliminating manual handoffs and the errors and delays they produce.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <div class="section-label" data-en="Your industry" data-es="Su industria">Your industry</div>
+        <h2 id="ind-cta-h2">Don't see your sector here? The underlying problems often translate.</h2>
+      </div>
+      <div class="cta-band-actions">
+        <a class="btn btn-primary" onclick="showPage('contact');return false" data-en="Discuss your situation" data-es="Discutir su situación">Discuss your situation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </div>
+</div><!-- /industries -->
+
+<!-- ABOUT PAGE -->
+<div class="page" id="page-about">
+  <section style="padding:80px 5vw 64px">
+    <div style="max-width:1160px;margin:0 auto">
+      <div class="section-label" data-en="About" data-es="Nosotros">About</div>
+      <h1 id="about-h1">Technology experts who<br>understand operations.</h1>
+      <p class="lead" id="about-lead">See4 Tech was built on a specific observation: most technology failures in enterprise environments are not caused by bad technology. They're caused by the gap between how systems are designed and how operations actually work.</p>
+    </div>
+  </section>
+
+  <div class="about-story">
+    <div class="about-story-grid">
+      <div>
+        <h2 data-en="How we got here." data-es="Cómo llegamos aquí.">How we got here.</h2>
+        <p data-en="See4 Tech was founded after more than three decades working inside and alongside enterprise operations — implementing ERP systems, debugging integration failures, and rebuilding processes that had been automated in ways that created more problems than they solved." data-es="See4 Tech fue fundada después de más de tres décadas trabajando dentro y junto a operaciones empresariales — implementando sistemas ERP, depurando fallas de integración y reconstruyendo procesos que habían sido automatizados de maneras que creaban más problemas de los que resolvían.">See4 Tech was founded after more than three decades working inside and alongside enterprise operations — implementing ERP systems, debugging integration failures, and rebuilding processes that had been automated in ways that created more problems than they solved.</p>
+        <p data-en="The pattern was consistent: skilled technology teams building technically correct solutions that didn't account for operational complexity. And skilled operations teams inheriting systems they didn't understand, maintaining workarounds rather than fixing root causes." data-es="El patrón era consistente: equipos tecnológicos calificados construyendo soluciones técnicamente correctas que no consideraban la complejidad operativa. Y equipos de operaciones calificados heredando sistemas que no entendían, manteniendo soluciones alternativas en lugar de corregir las causas raíz.">The pattern was consistent: skilled technology teams building technically correct solutions that didn't account for operational complexity. And skilled operations teams inheriting systems they didn't understand, maintaining workarounds rather than fixing root causes.</p>
+        <p data-en="We built See4 Tech to occupy that middle ground — combining the technical depth to build and integrate enterprise systems with the operational understanding to make them work in practice, not just in testing." data-es="Construimos See4 Tech para ocupar ese terreno intermedio — combinando la profundidad técnica para construir e integrar sistemas empresariales con la comprensión operativa para hacerlos funcionar en la práctica, no solo en las pruebas.">We built See4 Tech to occupy that middle ground — combining the technical depth to build and integrate enterprise systems with the operational understanding to make them work in practice, not just in testing.</p>
+      </div>
+      <div>
+        <h2 data-en="What we focus on." data-es="En qué nos enfocamos.">What we focus on.</h2>
+        <p data-en="We focus on a specific type of problem: complex system environments where the challenge isn't finding the right technology, but making technology work across organizational and operational boundaries." data-es="Nos enfocamos en un tipo específico de problema: entornos de sistemas complejos donde el desafío no es encontrar la tecnología correcta, sino hacer que la tecnología funcione a través de fronteras organizacionales y operativas.">We focus on a specific type of problem: complex system environments where the challenge isn't finding the right technology, but making technology work across organizational and operational boundaries.</p>
+        <p data-en="That means ERP ecosystems and the operational systems that surround them. It means integration architectures that hold together under real operational load. It means automation that accounts for exceptions, approvals, and the edge cases that appear in production but not in requirements documents." data-es="Eso significa ecosistemas ERP y los sistemas operativos que los rodean. Significa arquitecturas de integración que se mantienen bajo carga operativa real. Significa automatización que tiene en cuenta excepciones, aprobaciones y los casos límite que aparecen en producción pero no en los documentos de requisitos.">That means ERP ecosystems and the operational systems that surround them. It means integration architectures that hold together under real operational load. It means automation that accounts for exceptions, approvals, and the edge cases that appear in production but not in requirements documents.</p>
+        <p data-en="We are not a generalist firm. We take on engagements where our specific experience in enterprise systems, integration architecture, and operational processes gives us a material advantage over alternatives." data-es="No somos una firma generalista. Asumimos compromisos donde nuestra experiencia específica en sistemas empresariales, arquitectura de integración y procesos operativos nos da una ventaja material sobre las alternativas.">We are not a generalist firm. We take on engagements where our specific experience in enterprise systems, integration architecture, and operational processes gives us a material advantage over alternatives.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="values-section">
+    <div class="values-inner">
+      <div class="section-label" data-en="How we work" data-es="Cómo trabajamos">How we work</div>
+      <h2 id="values-h2">What we actually stand for.</h2>
+      <div class="values-grid">
+        <div class="value-card"><div class="value-num">01</div><h3 data-en="Technical honesty" data-es="Honestidad técnica">Technical honesty</h3><p data-en="We tell you what a system can and can't do, what a project will actually cost, and when a proposed approach is going to create problems. Enterprise technology is already full of people who tell clients what they want to hear." data-es="Le decimos lo que un sistema puede y no puede hacer, lo que un proyecto costará realmente, y cuándo un enfoque propuesto va a crear problemas. La tecnología empresarial ya está llena de personas que le dicen a los clientes lo que quieren escuchar.">We tell you what a system can and can't do, what a project will actually cost, and when a proposed approach is going to create problems. Enterprise technology is already full of people who tell clients what they want to hear.</p></div>
+        <div class="value-card"><div class="value-num">02</div><h3 data-en="Operational grounding" data-es="Fundamento operativo">Operational grounding</h3><p data-en="Every design decision is tested against one question: does this work in the environment it will actually run in, operated by the people who will actually operate it? Theory and production are different things." data-es="Cada decisión de diseño se prueba contra una pregunta: ¿esto funciona en el entorno en el que realmente correrá, operado por las personas que realmente lo operarán? La teoría y la producción son cosas diferentes.">Every design decision is tested against one question: does this work in the environment it will actually run in, operated by the people who will actually operate it? Theory and production are different things.</p></div>
+        <div class="value-card"><div class="value-num">03</div><h3 data-en="Ownership transfer" data-es="Transferencia de propiedad">Ownership transfer</h3><p data-en="We build systems your team can own. Documentation, training, and architecture that reduces complexity rather than concentrating it in our hands. Sustainable outcomes require that your team can maintain what was built." data-es="Construimos sistemas que su equipo puede poseer. Documentación, capacitación y arquitectura que reduce la complejidad en lugar de concentrarla en nuestras manos. Los resultados sostenibles requieren que su equipo pueda mantener lo que fue construido.">We build systems your team can own. Documentation, training, and architecture that reduces complexity rather than concentrating it in our hands. Sustainable outcomes require that your team can maintain what was built.</p></div>
+        <div class="value-card"><div class="value-num">04</div><h3 data-en="Scope integrity" data-es="Integridad del alcance">Scope integrity</h3><p data-en="We define scope precisely and manage it actively. Not as a billing mechanism, but because unclear scope is the most common cause of project failure and the most avoidable one." data-es="Definimos el alcance con precisión y lo gestionamos activamente. No como mecanismo de facturación, sino porque el alcance poco claro es la causa más común de fracaso de proyectos y la más evitable.">We define scope precisely and manage it actively. Not as a billing mechanism, but because unclear scope is the most common cause of project failure and the most avoidable one.</p></div>
+        <div class="value-card"><div class="value-num">05</div><h3 data-en="Measured outcomes" data-es="Resultados medidos">Measured outcomes</h3><p data-en="We establish baseline metrics before we start and measure against them when we're done. If we can't demonstrate that the engagement delivered tangible operational or financial improvement, we need to understand why." data-es="Establecemos métricas de referencia antes de comenzar y medimos contra ellas cuando terminamos. Si no podemos demostrar que el compromiso entregó una mejora operativa o financiera tangible, necesitamos entender por qué.">We establish baseline metrics before we start and measure against them when we're done. If we can't demonstrate that the engagement delivered tangible operational or financial improvement, we need to understand why.</p></div>
+        <div class="value-card"><div class="value-num">06</div><h3 data-en="Long-term thinking" data-es="Pensamiento a largo plazo">Long-term thinking</h3><p data-en="Architecture decisions made for short-term convenience compound over time. We make decisions that hold up at scale, across updates, and across the integrations you'll need to add in two years — not just today." data-es="Las decisiones de arquitectura tomadas por conveniencia a corto plazo se acumulan con el tiempo. Tomamos decisiones que se mantienen a escala, a través de actualizaciones y las integraciones que necesitará agregar en dos años — no solo hoy.">Architecture decisions made for short-term convenience compound over time. We make decisions that hold up at scale, across updates, and across the integrations you'll need to add in two years — not just today.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="capabilities-section">
+    <div class="capabilities-inner">
+      <div class="section-label" data-en="Capabilities" data-es="Capacidades">Capabilities</div>
+      <h2 id="cap-h2">What we bring to an engagement.</h2>
+      <div class="capabilities-grid">
+        <div class="cap-item"><div class="cap-dot"></div><div class="cap-text"><h4 data-en="SAP ecosystem expertise" data-es="Experiencia en ecosistema SAP">SAP ecosystem expertise</h4><p data-en="Configuration, extension, and integration across SAP S/4HANA, SAP ECC, and SAP BTP environments" data-es="Configuración, extensión e integración en entornos SAP S/4HANA, SAP ECC y SAP BTP">Configuration, extension, and integration across SAP S/4HANA, SAP ECC, and SAP BTP environments</p></div></div>
+        <div class="cap-item"><div class="cap-dot"></div><div class="cap-text"><h4 data-en="Enterprise integration architecture" data-es="Arquitectura de integración empresarial">Enterprise integration architecture</h4><p data-en="Design and implementation of stable, maintainable integration patterns between heterogeneous systems" data-es="Diseño e implementación de patrones de integración estables y mantenibles entre sistemas heterogéneos">Design and implementation of stable, maintainable integration patterns between heterogeneous systems</p></div></div>
+        <div class="cap-item"><div class="cap-dot"></div><div class="cap-text"><h4 data-en="Process automation" data-es="Automatización de procesos">Process automation</h4><p data-en="Workflow design, RPA implementation, and BPM platform configuration for back-office and operational processes" data-es="Diseño de flujos, implementación de RPA y configuración de plataformas BPM para procesos administrativos y operativos">Workflow design, RPA implementation, and BPM platform configuration for back-office and operational processes</p></div></div>
+        <div class="cap-item"><div class="cap-dot"></div><div class="cap-text"><h4 data-en="Cloud infrastructure" data-es="Infraestructura en la nube">Cloud infrastructure</h4><p data-en="Architecture and deployment on AWS, Azure, and GCP for enterprise applications and integration layers" data-es="Arquitectura y despliegue en AWS, Azure y GCP para aplicaciones empresariales y capas de integración">Architecture and deployment on AWS, Azure, and GCP for enterprise applications and integration layers</p></div></div>
+        <div class="cap-item"><div class="cap-dot"></div><div class="cap-text"><h4 data-en="Data engineering" data-es="Ingeniería de datos">Data engineering</h4><p data-en="ETL/ELT pipeline design, data modeling, and operational data store architecture" data-es="Diseño de pipelines ETL/ELT, modelado de datos y arquitectura de almacenes de datos operativos">ETL/ELT pipeline design, data modeling, and operational data store architecture</p></div></div>
+        <div class="cap-item"><div class="cap-dot"></div><div class="cap-text"><h4 data-en="Custom application development" data-es="Desarrollo de aplicaciones a medida">Custom application development</h4><p data-en="Full-stack development with a focus on integration-first design and operational usability" data-es="Desarrollo full-stack con enfoque en diseño con integración como prioridad y usabilidad operativa">Full-stack development with a focus on integration-first design and operational usability</p></div></div>
+        <div class="cap-item"><div class="cap-dot"></div><div class="cap-text"><h4 data-en="Technology strategy" data-es="Estrategia tecnológica">Technology strategy</h4><p data-en="Current-state assessment, roadmapping, and vendor evaluation for enterprise IT environments" data-es="Evaluación del estado actual, hoja de ruta y evaluación de proveedores para entornos de TI empresariales">Current-state assessment, roadmapping, and vendor evaluation for enterprise IT environments</p></div></div>
+        <div class="cap-item"><div class="cap-dot"></div><div class="cap-text"><h4 data-en="Hospitality systems" data-es="Sistemas de hospitalidad">Hospitality systems</h4><p data-en="Deep experience with PMS platforms, revenue management systems, and hospitality-specific ERP configurations" data-es="Amplia experiencia con plataformas PMS, sistemas de gestión de ingresos y configuraciones ERP específicas para hospitalidad">Deep experience with PMS platforms, revenue management systems, and hospitality-specific ERP configurations</p></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="padding-bottom:96px">
+    <div class="cta-band">
+      <div>
+        <div class="section-label" data-en="Work with us" data-es="Trabaje con nosotros">Work with us</div>
+        <h2 id="about-cta-h2">If the problem sounds familiar, it's worth fifteen minutes.</h2>
+      </div>
+      <div class="cta-band-actions">
+        <a class="btn btn-primary" onclick="showPage('contact');return false" data-en="Start a Conversation" data-es="Iniciar una Conversación">Start a Conversation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </div>
+</div><!-- /about -->
+
+<!-- CONTACT PAGE -->
+<div class="page" id="page-contact">
+  <section style="padding:80px 5vw 64px">
+    <div style="max-width:1160px;margin:0 auto">
+      <div class="section-label" data-en="Contact" data-es="Contacto">Contact</div>
+      <h1 id="contact-h1">Start with the problem,<br>not the solution.</h1>
+      <p class="lead" id="contact-lead">We don't need a polished brief. Tell us what's not working, what you've already tried, and what success looks like. We'll take it from there.</p>
+    </div>
+  </section>
+
+  <div class="contact-layout">
+    <div>
+      <h3 id="contact-expect-h3" style="margin-bottom:12px">What to expect</h3>
+      <p id="contact-expect-p" style="margin-bottom:32px">After you submit, a senior consultant — not a sales rep — will respond within one business day to schedule an initial call. That first call is 30–45 minutes and focused entirely on understanding your situation.</p>
+      <div class="contact-details">
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div class="contact-detail-text"><div class="label" data-en="Email" data-es="Correo electrónico">Email</div><div class="value"><a href="mailto:info@see4.tech" style="color:var(--lime)">info@see4.tech</a></div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 12 19.79 19.79 0 01.88 3.4 2 2 0 012.86 1.21h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0121.22 16z"/></svg></div>
+          <div class="contact-detail-text"><div class="label" data-en="Phone / WhatsApp" data-es="Teléfono / WhatsApp">Phone / WhatsApp</div><div class="value">+1 (786) 555-0190</div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="contact-detail-text"><div class="label" data-en="Response time" data-es="Tiempo de respuesta">Response time</div><div class="value" data-en="Within 1 business day" data-es="Dentro de 1 día hábil">Within 1 business day</div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="contact-detail-text"><div class="label" data-en="Based in" data-es="Con sede en">Based in</div><div class="value" data-en="Miami, FL · Serving clients internationally" data-es="Miami, FL · Sirviendo clientes internacionalmente">Miami, FL · Serving clients internationally</div></div>
+        </div>
+      </div>
+      <div style="padding:24px;background:var(--bg2);border:1px solid var(--border);border-radius:10px">
+        <h4 style="margin-bottom:8px;font-size:.9rem" id="contact-notready-h4">Not ready to reach out yet?</h4>
+        <p style="font-size:.85rem" id="contact-notready-p">Read through our <a onclick="showPage('approach');return false" style="color:var(--lime);cursor:pointer" data-en="Approach" data-es="Enfoque">Approach</a> or explore <a onclick="showPage('industries');return false" style="color:var(--lime);cursor:pointer" data-en="Industry use cases" data-es="Casos de uso por industria">Industry use cases</a> to get a clearer picture of how we work before starting a conversation.</p>
+      </div>
+    </div>
+
+    <div class="contact-form-wrapper">
+      <h3 id="form-title" style="margin-bottom:8px">Tell us about your situation</h3>
+      <p class="form-sub" id="form-subtitle">All fields are optional except name and email. More context helps us come prepared.</p>
+      <form onsubmit="handleFormSubmit(event)" id="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name" data-en="Name *" data-es="Nombre *">Name *</label>
+            <input type="text" id="name" name="name" data-en-placeholder="Your full name" data-es-placeholder="Su nombre completo" placeholder="Your full name" required>
+          </div>
+          <div class="form-group">
+            <label for="email" data-en="Work Email *" data-es="Correo corporativo *">Work Email *</label>
+            <input type="email" id="email" name="email" data-en-placeholder="you@company.com" data-es-placeholder="usted@empresa.com" placeholder="you@company.com" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="company" data-en="Company" data-es="Empresa">Company</label>
+            <input type="text" id="company" name="company" data-en-placeholder="Organization name" data-es-placeholder="Nombre de la organización" placeholder="Organization name">
+          </div>
+          <div class="form-group">
+            <label for="role" data-en="Role" data-es="Cargo">Role</label>
+            <input type="text" id="role" name="role" data-en-placeholder="e.g. CTO, IT Director" data-es-placeholder="ej. CTO, Director de TI" placeholder="e.g. CTO, IT Director">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="service" data-en="Area of interest" data-es="Área de interés">Area of interest</label>
+          <select id="service" name="service">
+            <option value="" disabled selected data-en="Select one (optional)" data-es="Seleccione uno (opcional)">Select one (optional)</option>
+            <option data-en="IT Strategy &amp; Transformation" data-es="Estrategia TI y Transformación">IT Strategy &amp; Transformation</option>
+            <option data-en="Systems Integration" data-es="Integración de Sistemas">Systems Integration</option>
+            <option data-en="Automation &amp; Process Optimization" data-es="Automatización y Optimización de Procesos">Automation &amp; Process Optimization</option>
+            <option data-en="Custom Development" data-es="Desarrollo a Medida">Custom Development</option>
+            <option data-en="Not sure yet — I need a diagnostic" data-es="Aún no estoy seguro — necesito un diagnóstico">Not sure yet — I need a diagnostic</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message" data-en="Describe the problem you're trying to solve" data-es="Describa el problema que está tratando de resolver">Describe the problem you're trying to solve</label>
+          <textarea id="message" name="message" data-en-placeholder="What's not working today? What have you already tried? What would success look like?" data-es-placeholder="¿Qué no funciona hoy? ¿Qué ha intentado ya? ¿Cómo se vería el éxito?"></textarea>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn btn-primary" id="form-btn">
+            <span data-en="Send Message" data-es="Enviar Mensaje">Send Message</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+        <p class="form-note" data-en="We don't share your information. There's no automated follow-up sequence." data-es="No compartimos su información. No hay secuencia de seguimiento automatizada.">We don't share your information. There's no automated follow-up sequence.</p>
+      </form>
+      <div id="form-success" style="display:none;text-align:center;padding:40px 0">
+        <div style="width:56px;height:56px;background:rgba(232,239,98,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;border:1px solid rgba(232,239,98,.3)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E8EF62" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3 style="margin-bottom:8px" data-en="Message received." data-es="Mensaje recibido.">Message received.</h3>
+        <p data-en="A senior consultant will be in touch within one business day." data-es="Un consultor senior se comunicará dentro de un día hábil.">A senior consultant will be in touch within one business day.</p>
+      </div>
+    </div>
+  </div>
+</div><!-- /contact -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="see4tech-nav-logo.png" alt="See4Tech" style="height:44px;width:auto;margin-bottom:12px">
+        <p data-en="Designing and integrating the technology infrastructure enterprise operations depend on." data-es="Diseñando e integrando la infraestructura tecnológica de la que dependen las operaciones empresariales.">Designing and integrating the technology infrastructure enterprise operations depend on.</p>
+        <p style="margin-top:8px;font-size:.8rem"><a href="https://see4.tech" style="color:var(--teal-light)">see4.tech</a></p>
+      </div>
+      <div class="footer-col">
+        <h5 data-en="Services" data-es="Servicios">Services</h5>
+        <ul>
+          <li><a onclick="showPage('services');return false" data-en="IT Strategy" data-es="Estrategia TI">IT Strategy</a></li>
+          <li><a onclick="showPage('services');return false" data-en="Systems Integration" data-es="Integración de Sistemas">Systems Integration</a></li>
+          <li><a onclick="showPage('services');return false" data-en="Automation" data-es="Automatización">Automation</a></li>
+          <li><a onclick="showPage('services');return false" data-en="Custom Development" data-es="Desarrollo a Medida">Custom Development</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 data-en="Company" data-es="Empresa">Company</h5>
+        <ul>
+          <li><a onclick="showPage('about');return false" data-en="About" data-es="Nosotros">About</a></li>
+          <li><a onclick="showPage('approach');return false" data-en="Approach" data-es="Enfoque">Approach</a></li>
+          <li><a onclick="showPage('industries');return false" data-en="Industries" data-es="Industrias">Industries</a></li>
+          <li><a onclick="showPage('contact');return false" data-en="Contact" data-es="Contacto">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5 data-en="Get in Touch" data-es="Contáctenos">Get in Touch</h5>
+        <ul>
+          <li><a href="mailto:info@see4.tech">info@see4.tech</a></li>
+          <li><a href="https://see4.tech">see4.tech</a></li>
+          <li><a onclick="showPage('contact');return false" data-en="Start a conversation" data-es="Iniciar una conversación">Start a conversation</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-en="© 2026 See4 Tech LLC. All rights reserved." data-es="© 2026 See4 Tech LLC. Todos los derechos reservados.">© 2026 See4 Tech LLC. All rights reserved.</span>
+      <span data-en="See The Future With Technology" data-es="Ve el Futuro con Tecnología">See The Future With Technology</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── PAGE NAVIGATION ──
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-links a[data-page]').forEach(a => {
+    a.classList.remove('active');
+    if (a.dataset.page === id) a.classList.add('active');
+  });
+  document.getElementById('navLinks').classList.remove('open');
+  window.scrollTo({ top: 0, behavior: 'instant' });
+  return false;
+}
+
+function toggleMobileNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+function scrollToService(id, btn) {
+  const el = document.getElementById('svc-' + id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelectorAll('.services-nav-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function handleFormSubmit(e) {
+  e.preventDefault();
+  document.getElementById('contact-form').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+}
+
+// ── LANGUAGE SYSTEM ──
+let currentLang = 'en';
+
+const longStrings = {
+  en: {
+    'hero-h1': 'Systems that hold your<br><span class="accent">operations together</span><br>shouldn\'t slow you down.',
+    'hero-sub': 'See4 Tech designs and integrates the technology infrastructure enterprise operations depend on — from ERP ecosystems and process automation to custom platforms built around how your business actually works.',
+    'svc-preview-h2': 'Four disciplines. One mandate: make your systems work.',
+    'why-h2': 'We close the gap between what IT promises and what operations require.',
+    'why-p': 'Most technology failures in enterprise environments aren\'t caused by bad tools — they\'re caused by implementations that didn\'t account for how the business actually operates. We\'ve spent over three decades solving that translation problem.',
+    'usecases-h2': 'Problems we\'ve solved in the field.',
+    'home-cta-h2': 'Tell us about the system problem you\'ve been working around.',
+    'svc-h1': 'Built for environments<br>where failure has a cost.',
+    'svc-lead': 'We don\'t offer a standard service catalog. Each engagement is assembled around your specific technical landscape, business constraints, and operational requirements.',
+    'svc-cta-h2': 'Not sure which service applies to your situation? Start with a conversation.',
+    'app-h1': 'How we go from<br>problem to production.',
+    'app-lead': 'Five structured phases. Each one designed to reduce the risk of the next. No phase is skipped because a client is in a hurry — we\'ve learned what that produces.',
+    'principles-h2': 'What guides every engagement.',
+    'app-cta-h2': 'Discovery begins with one conversation about your current situation.',
+    'ind-h1': 'Complex environments<br>require specific experience.',
+    'ind-lead': 'We work in industries where operational systems are mission-critical, integration complexity is high, and the cost of getting it wrong is measured in revenue, compliance exposure, or both.',
+    'ind-cta-h2': 'Don\'t see your sector here? The underlying problems often translate.',
+    'about-h1': 'Technology experts who<br>understand operations.',
+    'about-lead': 'See4 Tech was built on a specific observation: most technology failures in enterprise environments are not caused by bad technology. They\'re caused by the gap between how systems are designed and how operations actually work.',
+    'values-h2': 'What we actually stand for.',
+    'cap-h2': 'What we bring to an engagement.',
+    'about-cta-h2': 'If the problem sounds familiar, it\'s worth fifteen minutes.',
+    'contact-h1': 'Start with the problem,<br>not the solution.',
+    'contact-lead': 'We don\'t need a polished brief. Tell us what\'s not working, what you\'ve already tried, and what success looks like. We\'ll take it from there.',
+    'contact-expect-h3': 'What to expect',
+    'contact-expect-p': 'After you submit, a senior consultant — not a sales rep — will respond within one business day to schedule an initial call. That first call is 30–45 minutes and focused entirely on understanding your situation.',
+    'contact-notready-h4': 'Not ready to reach out yet?',
+    'contact-notready-p': 'Read through our <a onclick="showPage(\'approach\');return false" style="color:var(--lime);cursor:pointer">Approach</a> or explore <a onclick="showPage(\'industries\');return false" style="color:var(--lime);cursor:pointer">Industry use cases</a> to get a clearer picture of how we work before starting a conversation.',
+    'form-title': 'Tell us about your situation',
+    'form-subtitle': 'All fields are optional except name and email. More context helps us come prepared.'
+  },
+  es: {
+    'hero-h1': 'Los sistemas que sostienen<br><span class="accent">sus operaciones</span><br>no deberían frenarlo.',
+    'hero-sub': 'See4 Tech diseña e integra la infraestructura tecnológica de la que dependen las operaciones empresariales — desde ecosistemas ERP y automatización de procesos hasta plataformas personalizadas construidas en torno a cómo funciona realmente su negocio.',
+    'svc-preview-h2': 'Cuatro disciplinas. Un mandato: que sus sistemas funcionen.',
+    'why-h2': 'Cerramos la brecha entre lo que TI promete y lo que las operaciones requieren.',
+    'why-p': 'La mayoría de las fallas tecnológicas en entornos empresariales no se deben a malas herramientas — se deben a implementaciones que no consideraron cómo opera realmente el negocio. Llevamos más de tres décadas resolviendo ese problema de traducción.',
+    'usecases-h2': 'Problemas que hemos resuelto en el campo.',
+    'home-cta-h2': 'Cuéntenos sobre el problema de sistemas con el que ha estado trabajando.',
+    'svc-h1': 'Construido para entornos<br>donde el fallo tiene un costo.',
+    'svc-lead': 'No ofrecemos un catálogo de servicios estándar. Cada compromiso se ensambla en torno a su panorama técnico específico, las restricciones empresariales y los requisitos operativos.',
+    'svc-cta-h2': '¿No está seguro de qué servicio aplica a su situación? Comience con una conversación.',
+    'app-h1': 'Cómo vamos del<br>problema a la producción.',
+    'app-lead': 'Cinco fases estructuradas. Cada una diseñada para reducir el riesgo de la siguiente. Ninguna fase se salta porque un cliente tiene prisa — hemos aprendido lo que eso produce.',
+    'principles-h2': 'Lo que guía cada compromiso.',
+    'app-cta-h2': 'El descubrimiento comienza con una conversación sobre su situación actual.',
+    'ind-h1': 'Los entornos complejos<br>requieren experiencia específica.',
+    'ind-lead': 'Trabajamos en industrias donde los sistemas operativos son de misión crítica, la complejidad de integración es alta, y el costo de equivocarse se mide en ingresos, exposición al cumplimiento, o ambos.',
+    'ind-cta-h2': '¿No ve su sector aquí? Los problemas subyacentes a menudo se traducen.',
+    'about-h1': 'Expertos en tecnología que<br>entienden las operaciones.',
+    'about-lead': 'See4 Tech fue construida a partir de una observación específica: la mayoría de las fallas tecnológicas en entornos empresariales no son causadas por mala tecnología. Son causadas por la brecha entre cómo se diseñan los sistemas y cómo funcionan realmente las operaciones.',
+    'values-h2': 'Lo que realmente defendemos.',
+    'cap-h2': 'Lo que aportamos a un compromiso.',
+    'about-cta-h2': 'Si el problema le resulta familiar, vale quince minutos.',
+    'contact-h1': 'Comience con el problema,<br>no con la solución.',
+    'contact-lead': 'No necesitamos un informe pulido. Díganos qué no funciona, qué ha intentado ya y cómo sería el éxito. Nosotros nos encargamos del resto.',
+    'contact-expect-h3': 'Qué esperar',
+    'contact-expect-p': 'Después de enviar, un consultor senior — no un representante de ventas — responderá dentro de un día hábil para agendar una llamada inicial. Esa primera llamada dura 30 a 45 minutos y se enfoca únicamente en entender su situación.',
+    'contact-notready-h4': '¿Aún no está listo para contactarnos?',
+    'contact-notready-p': 'Lea nuestro <a onclick="showPage(\'approach\');return false" style="color:var(--lime);cursor:pointer">Enfoque</a> o explore los <a onclick="showPage(\'industries\');return false" style="color:var(--lime);cursor:pointer">Casos de uso por industria</a> para tener una idea más clara de cómo trabajamos antes de iniciar una conversación.',
+    'form-title': 'Cuéntenos sobre su situación',
+    'form-subtitle': 'Todos los campos son opcionales excepto nombre y correo. Más contexto nos ayuda a llegar preparados.'
+  }
+};
+
+function setLanguage(lang) {
+  currentLang = lang;
+  // Toggle buttons
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+
+  // Update all data-en/data-es text elements
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (!val) return;
+    // For elements that ARE the container (not nested) — update textContent
+    // But for buttons/links that contain SVG children, be careful
+    if (el.tagName === 'BUTTON' || el.tagName === 'OPTION') {
+      el.textContent = val;
+    } else if (el.children.length === 0 || (el.children.length === 1 && el.children[0].tagName === 'SVG')) {
+      // Only text or text+svg — safe to update textContent
+      const svgChild = el.querySelector('svg');
+      el.textContent = val;
+      if (svgChild) el.appendChild(svgChild);
+    } else {
+      // Has real child elements — skip (handled by innerHTML blocks below)
+    }
+  });
+
+  // Update placeholders
+  document.querySelectorAll('[data-' + lang + '-placeholder]').forEach(el => {
+    el.placeholder = el.getAttribute('data-' + lang + '-placeholder');
+  });
+
+  // Update select options
+  document.querySelectorAll('select option[data-' + lang + ']').forEach(opt => {
+    opt.textContent = opt.getAttribute('data-' + lang);
+  });
+
+  // Update long innerHTML blocks
+  Object.keys(longStrings[lang]).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = longStrings[lang][id];
+  });
+
+  // Update problem:: pseudo labels
+  document.querySelectorAll('.service-block').forEach(block => {
+    if (lang === 'es') block.classList.add('es-page');
+    else block.classList.remove('es-page');
+  });
+
+  // Update html lang attribute
+  document.documentElement.lang = lang;
+}
+
+// Prevent default on all onclick links
+document.querySelectorAll('a[onclick]').forEach(a => {
+  a.addEventListener('click', e => e.preventDefault());
+});
+</script>
+</body>
+</html>
