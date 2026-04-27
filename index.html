@@ -267,7 +267,7 @@
     .nav-links{display:none}
     .nav-mobile-btn{display:block}
     .nav-links.open{display:flex;flex-direction:column;position:fixed;top:72px;left:0;right:0;bottom:0;background:var(--bg);padding:24px 5vw;gap:4px;align-items:flex-start;z-index:99}
-    .nav-links.open a{font-size:1.1rem;padding:12px 0;width:100%}
+    .nav-links.open a{font-size:1.1rem;padding:12px 0;width:100%;min-height:44px;display:flex;align-items:center}
     .hero-stats{grid-template-columns:repeat(2,1fr);gap:24px}
     .services-grid,.use-cases-grid,.values-grid,.about-story-grid,.challenges-grid,.principles-grid{grid-template-columns:1fr}
     .why-grid{grid-template-columns:1fr;gap:48px}
@@ -285,6 +285,58 @@
     .footer-brand{grid-column:1/-1}
     .solutions-grid,.capabilities-grid{grid-template-columns:1fr}
     .footer-bottom{flex-direction:column;gap:8px;text-align:center}
+  }
+
+  /* ─── COMPONENT POLISH ──────────────────────────────────── */
+  /* Focus: suppress browser default, provide custom focus-visible */
+  *:focus{outline:0}
+  .btn:focus-visible{outline:2px solid var(--teal-light);outline-offset:3px;box-shadow:0 0 0 4px rgba(33,107,99,.18)}
+  .btn-primary:focus-visible{outline-color:var(--lime);box-shadow:0 0 0 4px rgba(232,239,98,.25)}
+  .nav-links a:focus-visible,.services-nav-btn:focus-visible,.lang-btn:focus-visible,.theme-toggle-btn:focus-visible{outline:2px solid var(--teal-light);outline-offset:2px}
+  .footer-col li a:focus-visible{outline:2px solid var(--teal-light);outline-offset:2px;border-radius:2px}
+  [data-theme="light"] .btn:focus-visible,[data-theme="light"] .nav-links a:focus-visible,[data-theme="light"] .services-nav-btn:focus-visible,[data-theme="light"] .lang-btn:focus-visible,[data-theme="light"] .footer-col li a:focus-visible{outline-color:var(--teal);box-shadow:0 0 0 4px rgba(33,107,103,.18)}
+  [data-theme="light"] .btn-primary:focus-visible{outline-color:var(--teal);box-shadow:0 0 0 4px rgba(33,107,103,.2)}
+  /* Precise transitions */
+  .btn{transition:background .15s ease-out,color .15s ease-out,transform .15s ease-out,box-shadow .15s ease-out,border-color .15s ease-out}
+  .service-tile{transition:background .2s ease-out,border-color .2s ease-out,transform .15s ease-out}
+  .use-case-card{transition:border-color .2s ease-out,transform .2s ease-out,box-shadow .2s ease-out}
+  .why-point{transition:border-color .2s ease-out,background .2s ease-out,transform .2s ease-out}
+  .solution-item{transition:border-color .2s ease-out,transform .15s ease-out}
+  /* Active/pressed states */
+  .btn:active{transform:translateY(0) scale(0.98)!important;box-shadow:none!important;transition-duration:.08s!important}
+  .service-tile:active{transform:scale(0.995)}
+  .use-case-card:active{transform:translateY(0) scale(0.995)!important}
+  .solution-item:active{transform:scale(0.995)}
+  /* Why-point hover direction hint */
+  .why-point:hover{transform:translateX(3px)}
+  /* Enhanced shadows */
+  .use-case-card{box-shadow:0 1px 3px rgba(0,0,0,.06),0 3px 8px rgba(0,0,0,.04)}
+  .use-case-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.13),0 2px 6px rgba(0,0,0,.06)}
+  .contact-form-wrapper{box-shadow:0 4px 16px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.06)}
+  .cta-band{box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  .why-visual{box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  /* Hero entrance animations */
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .hero-eyebrow{animation:fadeInUp .5s ease-out .1s both}
+  .hero h1{animation:fadeInUp .55s ease-out .2s both}
+  .hero-sub{animation:fadeInUp .5s ease-out .32s both}
+  .hero-actions{animation:fadeInUp .5s ease-out .45s both}
+  .hero-stats{animation:fadeInUp .55s ease-out .58s both}
+  /* Scroll-triggered animation base */
+  .anim-up{opacity:0;transform:translateY(18px);transition:opacity .5s ease-out,transform .5s ease-out}
+  .anim-up.in{opacity:1;transform:translateY(0)}
+  /* Form submit loading state */
+  .btn-loading{position:relative;pointer-events:none}
+  .btn-loading>*{visibility:hidden}
+  .btn-loading::after{content:'';position:absolute;width:16px;height:16px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin .6s linear infinite;inset:0;margin:auto}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  /* Form success entrance */
+  #form-success{animation:fadeInUp .4s ease-out}
+  /* Reduced motion */
+  @media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;animation-iteration-count:1!important}
+    .anim-up{opacity:1;transform:none;transition:none}
+    .hero-eyebrow,.hero h1,.hero-sub,.hero-actions,.hero-stats{animation:none;opacity:1;transform:none}
   }
 </style>
 </head>
@@ -1204,6 +1256,53 @@ function setLanguage(lang) {
 document.querySelectorAll('a[onclick]').forEach(a => {
   a.addEventListener('click', e => e.preventDefault());
 });
+
+  // ── SCROLL-TRIGGERED ENTRANCE ANIMATIONS ──
+  (function() {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+
+    function initEntranceAnims() {
+      var groups = [
+        '.service-tile', '.use-case-card', '.why-point',
+        '.value-card', '.principle-item', '.solution-item',
+        '.phase', '.contact-detail', '.cap-item', '.challenge-item'
+      ];
+      groups.forEach(function(sel) {
+        document.querySelectorAll(sel).forEach(function(el, i) {
+          if (el.dataset.animObserved) return;
+          el.dataset.animObserved = '1';
+          el.classList.add('anim-up');
+          el.style.transitionDelay = Math.min((i % 4) * 70, 210) + 'ms';
+          io.observe(el);
+        });
+      });
+    }
+
+    var _origShowPage = showPage;
+    window.showPage = function(id) {
+      var r = _origShowPage(id);
+      setTimeout(initEntranceAnims, 20);
+      return r;
+    };
+
+    initEntranceAnims();
+  })();
+
+  // ── FORM LOADING STATE ──
+  window.handleFormSubmit = function(e) {
+    e.preventDefault();
+    var btn = document.getElementById('form-btn');
+    btn.classList.add('btn-loading');
+    setTimeout(function() {
+      btn.classList.remove('btn-loading');
+      document.getElementById('contact-form').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    }, 800);
+  };
 
   function toggleTheme() {
     const html = document.documentElement;
